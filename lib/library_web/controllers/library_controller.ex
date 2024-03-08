@@ -1,11 +1,18 @@
 defmodule LibraryWeb.LibraryController do
+
+  def start do
+    unzip_epub("/home/liar/Downloads/epub/one/Alices Adventures in Wonderland.epub")
+  end
     def unzip_epub(file_path) do
       case File.read(file_path) do
         {:ok, content} ->
           case :zip.unzip(content) do
             {:ok, ext_files} ->
                 IO.puts("EPUB successfully unzipped!")
-                ext_files |> Enum.map(&to_string/1) |> ext_xhtml() |> Enum.map(&on_files/1)|> IO.inspect()
+                ext_files
+                 |> Enum.map(&to_string/1)
+                 |> ext_xhtml()
+                 |> Enum.map(&on_files/1)
 
                 {:error, reason} ->
             {:error, "Failed to unzip EPUB: #{reason}"}
@@ -26,61 +33,138 @@ defmodule LibraryWeb.LibraryController do
     def nolist(xhtml) do
       parsed_content = Floki.parse_document(xhtml)
       |> elem(1)  # Get the parsed HTML tree
+      _text_content = Floki.text(parsed_content)
 
-      # Extract the text content
-      text_content = Floki.text(parsed_content)
-
-      text_content
     end
 
-    def filter_xhtml(xhtml) do
+    def filter_para(xhtml) do
       {:ok, parsed_html} = Floki.parse_document(xhtml)
-      IO.inspect(parsed_html, label: "Parsed HTML")  # Debug statement
-
-      p_tags = Floki.find(parsed_html, "ns|p")
-      IO.inspect(p_tags, label: "P tags")  # Debug statement
-
+      #IO.inspect(parsed_html, label: "Parsed HTML")
+      p_tags = Floki.find(parsed_html, "p")
+      #IO.inspect(p_tags, label: "P tags")
       Enum.map(p_tags, &Floki.raw_html/1)
     end
-
-    def uno(x) do
-      filter_xhtml(x) |> nolist() |> maper()
+    def filter_meta(xhtml) do
+      {:ok, parsed_html} = Floki.parse_document(xhtml)
+      #IO.inspect(parsed_html, label: "Parsed HTML")
+      p_tags = Floki.find(parsed_html, "title")
+      #IO.inspect(p_tags, label: "P tags")
+      Enum.map(p_tags, &Floki.raw_html/1)
     end
-
     def ext_xhtml(files) do
       Enum.filter(files, fn file -> String.contains?(file, ".xhtml")end)
     end
-    def start do
-      unzip_epub("/home/liar/Downloads/Wonderland.epub") # here the path
 
+    def unlist([x]), do: x
+    def nofile(file_path) do
+      case File.read(file_path) do
+        {:ok, content} ->
+          _x = filter_meta(content) |> IO.inspect()  |> nolist() |> maper() |> insert()
+
+        #  %Library.Schema.Content{}
+        #  |> Ecto.Changeset.change(x)
+        #  |> Library.Repo.insert()
+
+        {:error, reason} ->
+          IO.puts("Failed to read #{file_path}: #{reason}")
+      end
     end
-
-    def file(list) do
-      Enum.map(list,fn x -> File.read(x)|> tuple() |> Floki.parse_document() end)
-    end
-    def tuple({:ok ,y}), do: y
-
     def on_files(file_paths) when is_list(file_paths) do
       Enum.map(file_paths, fn file_path ->
-        # case File.read(file_path) do
-        #   {:ok, content} ->
-             uno(file_path)end)
-        #     perform_action_on_content(content)
-        #   {:error, reason} ->
-        #     IO.puts("Failed to read #{file_path}: #{reason}")
-        #end
-      #end
+        case File.read(file_path) do
+          {:ok, content} ->
+            processed_content = content
+            |> filter_para()
+            |> nolist()
+            |> maper()
+            title = filter_meta(content)
+            |> unlist()
+            |> clean_title()
+            changeset = %Library.Test{}
+            |> Ecto.Changeset.change(%{data: processed_content, string: title})
 
+            case Library.Repo.insert(changeset) do
+              {:ok, _record} -> IO.puts("Record inserted successfully.")
+              {:error, changeset} -> IO.inspect(changeset.errors)
+            end
+
+          {:error, reason} ->
+            IO.puts("Failed to read #{file_path}: #{reason}")
+        end
+      end)
     end
     def on_files(file_path) when is_binary(file_path) do
       on_files([file_path])
     end
-    def perform_action_on_content(content) do
-      IO.inspect(content)
+    def action(content) do
+      filter_para(content) |> IO.inspect()  |> nolist()  |> IO.inspect() |> maper()
     end
-    #
+    def first([head | _tail] = _list) do
+      action(head)
     end
-  #end
+
+    def first([]), do: :empty_list
+    def insert(_unexpected_data) do
+      IO.puts("Received unexpected data format, skipping insert.")
+    end
+    def clean_title(html_string) when is_binary(html_string) do
+      case Floki.find(html_string, "title") do
+        nil -> "No title found"  # Handle the case when no title tag is present
+        title_element -> Floki.text(title_element)
+      end
+    end
+  end
+
+  # def tuple({:ok ,y}), do: y
+  #   def file(list) do
+  #     Enum.map(list,fn x -> File.read(x)|> tuple() |> Floki.parse_document() end)
+  #   end
+    # def insert(paragraphs) do
+    #   Enum.each(paragraphs, fn %{parse: parse, paragraph: paragraph} ->
+    #     changeset = Library.Contents.changeset(%Library.Contents{}, %{
+    #       parse: parse,
+    #       paragraph: paragraph,
+    #       timestamp: NaiveDateTime.utc_now()  # Set the timestamp as needed
+    #       # Add other fields as necessary
+    #     })
+
+    #     case Library.Repo.insert(changeset) do
+    #       {:ok, _content} ->
+    #         IO.puts("Paragraph inserted successfully")
+    #       {:error, changeset} ->
+    #         IO.inspect(changeset.errors, label: "Error inserting paragraph")
+    #     end
+    #   end)
+    # end
+
+    # my_single_map = %{parse: "paragraph"}
+
+    # %Library.Content{}
+    # |> Ecto.Changeset.change(my_single_map)
+    # |> Library.Repo.insert()
+
+    # def insert(paragraphs) when is_map(paragraphs) do
+    #   #Enum.map(paragraphs, fn {index, paragraph} ->
+    #     # Assuming you want to insert the paragraphs even if they're just an index and a string
+    #     changeset = Library.Contents.changeset(%Library.Contents{}, %{
+    #       parse: nil,  # or any default value
+    #       paragraph: paragraphs,
+    #       timestamp: NaiveDateTime.utc_now()  # Set the timestamp as needed
+    #       # Add other fields as necessary
+    #     })
+
+    #     case Library.Repo.insert(changeset) do
+    #       {:ok, _content} ->
+    #         IO.puts("Paragraph inserted successfully")
+    #       {:error, changeset} ->
+    #         IO.inspect(changeset.errors, label: "Error inserting paragraph")
+    #     end
+      #end)
+    # end
+
+    # Fallback for other data types
+
+
   #def process_files(contents) do
     #   Enum.each(contents, &process_content/1)
     # end
@@ -120,3 +204,17 @@ defmodule LibraryWeb.LibraryController do
     #   Enum.map(p_tags, &Floki.raw_html/1)
     #   # Parse the XHTML content
     # end
+  # def on_files(file_paths) when is_list(file_paths) do
+    #   Enum.map(file_paths, fn file_path ->
+    #     case File.read(file_path) do
+    #       {:ok, content} ->
+    #         x = filter_xhtml(content) |> IO.inspect()  |> nolist()  |> IO.inspect() |> maper()
+    #         %Library.Test{}
+    #         |> Ecto.Changeset.change(x)
+    #         |> Library.Repo.insert()
+
+    #       {:error, reason} ->
+    #         IO.puts("Failed to read #{file_path}: #{reason}")
+    #     end
+    #   end)
+    #   end
