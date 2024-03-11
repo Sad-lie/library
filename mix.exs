@@ -19,9 +19,10 @@ defmodule Library.MixProject do
   def application do
     [
       mod: {Library.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :telegram]
     ]
   end
+
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -51,7 +52,11 @@ defmodule Library.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:unzip, "~> 0.10.0"},
-      {:floki, "~> 0.35.0"}
+      {:floki, "~> 0.35.0"},
+      {:telegram, github: "visciang/telegram", tag: "1.2.1"},
+      {:tesla, "~> 1.2"},
+      {:hackney, "~> 1.12"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 

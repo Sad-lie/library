@@ -17,9 +17,10 @@ defmodule Library.Application do
       # Start a worker by calling: Library.Worker.start_link(arg)
       # {Library.Worker, arg},
       # Start to serve requests, typically the last entry
-      LibraryWeb.Endpoint
+      LibraryWeb.Endpoint,
+      Library.TelegramPoller
+     # {LibraryWeb.TelegramController.Bot, []}
     ]
-
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Library.Supervisor]

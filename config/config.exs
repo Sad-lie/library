@@ -10,6 +10,11 @@ import Config
 config :library,
   ecto_repos: [Library.Repo],
   generators: [timestamp_type: :utc_datetime]
+config :telegram,
+  bot_name: "@deathreadbot",
+  token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
+config :library, Library.TelegramBot,
+  token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
 
 # Configures the endpoint
 config :library, LibraryWeb.Endpoint,
@@ -40,6 +45,8 @@ config :esbuild,
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
+config :tesla, adapter: {Tesla.Adapter.Hackney, [recv_timeout: 40_000]}
+
 
 # Configure tailwind (the version is required)
 config :tailwind,

@@ -18,8 +18,8 @@ defmodule LibraryWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    post "/telegram_webhook", TelegramController, :handle_webhook
   end
-
   # Other scopes may use custom stacks.
   # scope "/api", LibraryWeb do
   #   pipe_through :api
