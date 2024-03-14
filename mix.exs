@@ -56,7 +56,8 @@ defmodule Library.MixProject do
       {:telegram, github: "visciang/telegram", tag: "1.2.1"},
       {:tesla, "~> 1.2"},
       {:hackney, "~> 1.12"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:poison, "~> 5.0"}
     ]
   end
 

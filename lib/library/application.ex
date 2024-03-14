@@ -7,6 +7,16 @@ defmodule Library.Application do
 
   @impl true
   def start(_type, _args) do
+    # webhook_config = [
+    #   host: "myapp.public-domain.com",
+    #   port: 443,
+    #   local_port: 4_000
+    # ]
+
+    # bot_config = [
+    #   token: Application.fetch_env!(:library, :token_counter_bot),
+    #   max_bot_concurrency: Application.fetch_env!(:library, :max_bot_concurrency)
+    # ]
     children = [
       LibraryWeb.Telemetry,
       Library.Repo,
@@ -19,12 +29,15 @@ defmodule Library.Application do
       # Start to serve requests, typically the last entry
       LibraryWeb.Endpoint,
       Library.TelegramPoller
-     # {LibraryWeb.TelegramController.Bot, []}
+      #LibraryWeb.WebhookServer,
+     # {LibraryWeb.TelegramController, []}
+     #{Telegram.Webhook, config: webhook_config, bots: [{Libirary.Bot, bot_config}]}
     ]
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Library.Supervisor]
     Supervisor.start_link(children, opts)
+
   end
 
   # Tell Phoenix to update the endpoint configuration

@@ -18,7 +18,10 @@ defmodule LibraryWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    post "/telegram_webhook", TelegramController, :handle_webhook
+    # post "/telegram_webhook", TelegramController, :handle_webhook
+    # post "/telegram/:token", TelegramWebHookController, :receive_update
+    # post "/your_webhook_path", TelegramWebhookController, :webhook
+    #post "/telegram/:token", TelegramWebhookController, :webhook
   end
   # Other scopes may use custom stacks.
   # scope "/api", LibraryWeb do
@@ -42,3 +45,4 @@ defmodule LibraryWeb.Router do
     end
   end
 end
+# Run this in an IEx session or a setup task

@@ -13,10 +13,17 @@ config :library,
 config :telegram,
   bot_name: "@deathreadbot",
   token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
-config :library, Library.TelegramBot,
+config :library, LibraryWeb.TelegramController,
+  token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
+  config :library, Library.TelegramPoller,
+  token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
+  config :library, Library.TelegramBot,
   token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
 
 # Configures the endpoint
+# config :library, :token_counter_bot, "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
+# config :library, max_bot_concurrency: 5
+
 config :library, LibraryWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
