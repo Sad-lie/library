@@ -1,4 +1,4 @@
-defmodule Library.Schema.Library do
+defmodule Library.Schema.Collection do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -11,8 +11,8 @@ defmodule Library.Schema.Library do
   end
 
   @doc false
-  def changeset(library, attrs) do
-    library
+  def changeset(collections, attrs) do
+    collections
     |> cast(attrs, [:timestamp])
     |> validate_required([:timestamp])
   end

@@ -27,20 +27,55 @@ defmodule LibraryWeb.TelegramController do
     #  "select intravel"
     #  "start / pause"
    end
+   def send_message(text, chat_id, opts \\ %{}) do
+    params = %{
+      chat_id: chat_id,
+      text: text,
+      disable_notification: true
+    } |> Map.merge(opts)
 
+    Telegram.Api.request(@token, "sendMessage", params)
+  end
   def sendMessage(text,chat_id) ,do: Telegram.Api.request(@token, "sendMessage", chat_id: chat_id, text: "#{text}", disable_notification: true)
 
 
+  def intravel ,do: 1000
 
-  def iterate_through_map(map, interval \\ 5000) do
-    #   map = %{}#sender() # Make sure this gets your map as expected.
-        Enum.each(map, fn {key, value} ->
-         Process.sleep(interval)
-         IO.puts("Key: #{key}, Value: #{value}")
-         text = value
-         Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: text, disable_notification: true)
-    end)
-  end
+  def iterate_through_map(book_name) do
+    interval = intravel()
+    book_name_string = to_string(book_name)
+
+    case Library.Books.get_book_data_by_name(book_name_string) do
+      {:ok, data_map} ->
+        Enum.map(data_map, fn {key, value} ->
+          Process.sleep(interval)
+          IO.puts("Key: #{key}, Value: #{value}")
+          Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: value, disable_notification: true)
+        end)
+      _error ->
+        IO.puts("Failed to retrieve book data")
+      end
+    end
+      # {:ok, book_data} ->
+      #   # Process book data
+      #   Enum.each(book_data, fn {key, value} ->
+      #     Process.sleep(interval)
+      #     IO.puts("Key: #{key}, Value: #{value}")
+      #     text = value
+      #     Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: text, disable_notification: true)
+      #   end)
+      # {:error, reason} ->
+      #     sendMessage("An error occurred: #{inspect(reason)}", @chat_id)
+
+
+        # map = Library.Books.get_book_data_by_name(book_name)
+        # Enum.each(map, fn {key, value} ->
+        #  Process.sleep(interval)
+        #  IO.puts("Key: #{key}, Value: #{value}")
+        #  text = value
+        #  Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: text, disable_notification: true)
+    #end)
+  #end
 
   def keyboard(list_of_keyboard, text_option,chat_id) do
         keyboard_markup = %{one_time_keyboard: true, keyboard: list_of_keyboard}
@@ -51,15 +86,56 @@ def istart do
   x = [["one","two","three"],["one","two","three"],["one","two","three"]]
   keyboard(x,"choose one" ,@chat_id)
 end
-
-def button(list_of_options,text_input,chat_id) do
-  buttons = Enum.map(list_of_options ,&option_maker/1)
-  keyboard_markup = %{
-    inline_keyboard: buttons
-  }
-  Telegram.Api.request(@token, "sendMessage", chat_id: chat_id, text: "#{text_input}", reply_markup: keyboard_markup)
+def button(list_of_options, text_input, chat_id) do
+  buttons = Enum.map(list_of_options, &option_maker/1)
+  keyboard_markup = %{inline_keyboard: buttons}
+  Telegram.Api.request(@token, "sendMessage",
+    chat_id: chat_id,
+    text: text_input,
+    reply_markup: Jason.encode!(keyboard_markup))
 end
-def option_maker(input) ,do: [%{text: "#{input}", callback_data: "#{input}"}]
+def req(chat_id,text_input,keyboard_markup) do
+Telegram.Api.request(@token, "sendMessage", chat_id: chat_id, text: text_input, reply_markup: keyboard_markup)
+end
+def option_maker(input), do: [[%{text: input, callback_data: input}]]
+# def button(list_of_options,text_input,chat_id) do
+#   buttons = Enum.map(list_of_options ,&option_maker/1)
+#   keyboard_markup = %{
+#     inline_keyboard: buttons
+#   }
+#   Telegram.Api.request(@token, "sendMessage", chat_id: chat_id, text: "#{text_input}", reply_markup: keyboard_markup)
+# end
+# def option_maker(input) ,do: [%{text: "#{input}", callback_data: "#{input}"}]
+def gogo do
+  # send_message("Click here to visit Google", @chat_id, %{
+  #   reply_markup: %{
+  #     inline_keyboard: [
+  #       [
+  #         %{
+  #           text: "Visit Google",
+  #           url: "https://www.google.com"
+  #         }
+  #       ]
+  #     ]
+  #   }
+  # })
+  send_message("Choose an option:", @chat_id, %{
+    reply_markup: %{
+      inline_keyboard: [
+        [%{text: "Option 1", callback_data: "option_1"}],
+        [%{text: "Option 2", callback_data: "option_2"}],
+        [%{text: "Option 3", callback_data: "option_3"}]
+      ]
+    }
+  })
+
+end
+# def list_of_books_option_make()do
+#   reply_markup = %{
+#   }
+#   send_message(text , @chat_id,)
+
+#end
 end
 
 

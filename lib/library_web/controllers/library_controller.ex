@@ -1,5 +1,10 @@
 defmodule LibraryWeb.LibraryController do
 
+
+  use Telegram.Bot
+
+  alias Library.Users
+
   def start do
     unzip_epub("/home/liar/Downloads/epub/one/Alices Adventures in Wonderland.epub")
   end
@@ -114,9 +119,10 @@ defmodule LibraryWeb.LibraryController do
         _ -> "No title found"
       end
     end
-  end
 
 
+
+end
 
 
 

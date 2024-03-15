@@ -4,15 +4,16 @@ defmodule Library.Schema.User do
 
   schema "users" do
     field :name, :string
+    field :telegram_id, :integer
     field :timestamp, :naive_datetime
-    has_one :library , Library.Schema.Library
+   # has_one :collection , Library.Schema.Collection
     timestamps()
   end
 
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :timestamp])
-    |> validate_required([:name, :timestamp])
+    |> cast(attrs, [:name,:telegram_id, :timestamp])
+    |> validate_required([:name,:telegram_id, :timestamp])
   end
 end
