@@ -1,35 +1,35 @@
-defmodule Library.Books do
+defmodule Library.Contents do
   alias Library.Repo
-  alias Library.Schema.Book
+  alias Library.Schema.Content
   import Ecto.Query, warn: false
   require Logger
   # List all
-  def list_books do
-    Repo.all(Book)
+  def list_contents do
+    Repo.all(Content)
   end
 
   # Get a single
-  def get_book!(id) do
-    Repo.get!(Book, id)
+  def get_content!(id) do
+    Repo.get!(Content, id)
   end
 
-  # Create a book
-  def create_book(attrs) do
-    %Book{}
-    |> Book.changeset(attrs)
+  # Create a Content
+  def create_content(attrs) do
+    %Content{}
+    |> Content.changeset(attrs)
     |> Repo.insert()
   end
 
-  # Update a book
-  def update_book(%Book{} = book, attrs) do
-    book
-    |> Book.changeset(attrs)
+  # Update a content
+  def update_content(%Content{} = content, attrs) do
+    content
+    |> Content.changeset(attrs)
     |> Repo.update()
   end
 
-  # Delete a book
-  def delete_book(%Book{} = book) do
-    Repo.delete(book)
+  # Delete a content
+  def delete_content(%Content{} = content) do
+    Repo.delete(content)
   end
 
   # deelete all
@@ -41,36 +41,32 @@ defmodule Library.Books do
     Repo.delete_all(query)
   end
 
-  def add_book_to_user_collection(user_id, book_attrs) do
+  def add_content_to_user_collection(user_id, content_attrs) do
     user = Library.Users.get_user!(user_id)
 
     # First, build the association without a changeset
-    book = Ecto.build_assoc(user, :books, book_attrs)
+    content = Ecto.build_assoc(user, :contents, content_attrs)
 
-    # Then, create a changeset for the new book
-    changeset = Book.changeset(book, book_attrs)
+    # Then, create a changeset for the new Content
+    changeset = Content.changeset(content, content_attrs)
 
-    # Finally, insert the new book into the database
+    # Finally, insert the new Content into the database
     Repo.insert(changeset)
   end
 
-  # list books data
+  # list Contents data
   def list_data do
-    Repo.all(Book)
+    Repo.all(Content)
   end
 
-  # list users books
-  def list_user_books(user_id) do
+  # list users Contents
+  def list_user_content(user_id) do
     user = Library.Users.get_user!(user_id)
-    Repo.all(from b in Book, where: b.user_id == ^user.id)
+    Repo.all(from b in Content, where: b.user_id == ^user.id)
   end
-
-
-
-
 end
 
-# add book to collection
+# add Content to collection
 # def add_book_to_user_collection(user_id, book_attrs) do
 #   user = Library.Users.get_user!(user_id)
 #   %Book{}

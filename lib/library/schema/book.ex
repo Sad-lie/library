@@ -4,9 +4,9 @@ defmodule Library.Schema.Book do
 
   schema "books" do
     field :name, :string
+    field :book_id, :integer
     field :timestamp, :naive_datetime
-    field :data, :map
-    # belongs_to :collection , Library.Schema.Collection
+    has_many :content, Library.Schema.Content
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule Library.Schema.Book do
   @doc false
   def changeset(book, attrs) do
     book
-    |> cast(attrs, [:name, :timestamp, :data])
+    |> cast(attrs, [:name, :timestamp])
     |> validate_required([:name, :timestamp])
   end
 end

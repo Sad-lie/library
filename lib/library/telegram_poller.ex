@@ -45,29 +45,194 @@ defmodule Library.TelegramPoller do
         state
       end
     end
-    def handle_errors(%CaseClauseError{term: term}) do
-      Logger.error("Encountered a case clause error with term: #{inspect(term)}")
-      {:error, :case_clause_error}
-    end
-    def handle_errors(%KeyError{key: key}) do
-      Logger.error("Key error: the key #{inspect(key)} is missing.")
-      {:error, :key_missing}
-    end
-    def handle_errors(_error) do
-      Logger.error("An unexpected error occurred.")
-      {:error, :unknown_error}
-    end
+
     def process_message(%{"text" => "/start", "chat" => %{"id" => chat_id}} = message) do
       process_text_message("/start", chat_id, message["chat"]["username"], message["from"]["id"])
     end
     def process_message(%{"text" => "/list", "chat" => %{"id" => chat_id}} = message) do
       process_text_message("/list", chat_id, message["chat"]["username"], message["from"]["id"])
     end
+    def process_message(%{"text" => "/parse", "chat" => %{"id" => chat_id}} = message) do
+      process_text_message("/parse", chat_id, message["chat"]["username"], message["from"]["id"])
+    end
     def process_message(%{"text" => text, "chat" => %{"id" => chat_id}} = message) when is_binary(text) do
       username = Map.get(message, ["chat", "username"])
       user_id = Map.get(message, ["from", "id"])
       process_text_message(text, chat_id, username, user_id)
     end
+
+
+    def process_message(%{"document" => %{"file_id" => file_id}, "chat" => %{"id" => chat_id}} = message) do
+      process_document(file_id, chat_id)
+    end
+
+    def process_document(file_id, chat_id) do
+      case fetch_document(file_id) do
+        {:ok, file_data} ->
+          save_epub(file_data)
+          Telegram.sendMessage("Epub file uploaded and saved successfully!", chat_id)
+
+        {:error, reason} ->
+          Logger.error("Failed to fetch document: #{inspect(reason)}")
+          Telegram.sendMessage("Failed to process the document. Please try again later.", chat_id)
+      end
+    end
+
+    def fetch_document(file_id) do
+      token = Application.get_env(:library, Library.TelegramBot)[:token]
+      case get_file(token, file_id) do
+        {:ok, %{"file_path" => file_path}} ->
+          {:ok, download_file(file_path)}
+
+        {:error, reason} ->
+          {:error, reason}
+      end
+    end
+
+    defp download_file(file_path) do
+      base_url = "https://api.telegram.org/file/bot"
+      full_url = "#{base_url}#{@token}/#{file_path}"
+      case HTTPoison.get(full_url) do
+        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+          {:ok, body}
+
+        {:error, reason} ->
+          {:error, reason}
+      end
+    end
+
+    def get_file(token, file_id) do
+      # Construct the URL for the getFile Telegram API method
+      get_file_url = "#{@base_url}#{token}/getFile?file_id=#{file_id}"
+
+      case HTTPoison.get(get_file_url) do
+        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+          case Jason.decode(body) do
+            {:ok, %{"ok" => true, "result" => result}} ->
+              # Extract the file_path from the result
+              file_path = result["file_path"]
+              {:ok, file_path}
+
+            {:ok, _} ->
+              {:error, :unexpected_response_format}
+
+            {:error, _} = error ->
+              error
+          end
+
+        {:ok, %HTTPoison.Response{status_code: status_code}} ->
+          {:error, {:unexpected_status_code, status_code}}
+
+        {:error, _} = error ->
+          error
+      end
+    end
+
+    def save_epub(file_data) do
+      # Your logic to save the ePub file in the library
+      # This could involve storing the file in a database or filesystem
+      # Example: File.write("path_to_save/file_name.epub", file_data)
+      # Replace "path_to_save" and "file_name.epub" with your desired path and filename
+    end
+
+    # def process_message(%{"document" => document, "chat" => %{"id" => chat_id}} = message) do
+    #   mime_type = document["mime_type"]
+    #   file_id = document["file_id"]
+
+    #   # Check if the document is an ePub file
+    #   if mime_type == "application/epub+zip" do
+    #     process_epub_document(file_id, chat_id)
+    #   else
+    #     # Handle other file types or send an error message to the user
+    #     Telegram.sendMessage("Please send an ePub file.", chat_id)
+    #   end
+    # end
+
+    # def download_file(file_id) do
+    #   # Use the getFile Telegram API method to get the file path
+    #  # token = Application.get_env(:library, Library.TelegramBot)[:token]
+    #  token = @token
+    #   get_file_url = "#{@base_url}bot#{token}/getFile?file_id=#{file_id}"
+
+    #   case HTTPoison.get(get_file_url) do
+    #     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+    #       file_path = Jason.decode!(body)["result"]["file_path"]
+    #       download_url = "#{@base_url}file/bot#{token}/#{file_path}"
+
+    #       # Now download the file. You might save it to a temporary location.
+    #       # Ensure you have the necessary permissions and error handling.
+    #       file_local_path = "path/to/save/#{file_path}" # Adjust this path as necessary
+    #       {:ok, %HTTPoison.Response{status_code: 200, body: file_body}} = HTTPoison.get(download_url)
+    #       File.write(file_local_path, file_body)
+
+    #       {:ok, file_local_path}
+    #     {:error, reason} ->
+    #       {:error, reason}
+    #   end
+    # end
+
+    # def download_file(file_id) do
+    #   token = @token
+    #   get_file_url = "#{@base_url}bot#{token}/getFile?file_id=#{file_id}"
+
+    #   case HTTPoison.get(get_file_url) do
+    #     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+    #       file_path = Jason.decode!(body)["result"]["file_path"]
+    #       download_url = "#{@base_url}file/bot#{token}/#{file_path}"
+
+    #       # Attempt to download the file
+    #       case HTTPoison.get(download_url) do
+    #         {:ok, %HTTPoison.Response{status_code: 200, body: file_body}} ->
+    #           # Save the file locally
+    #           file_local_path = "path/to/save/#{file_path}" # Adjust as necessary
+    #           File.write(file_local_path, file_body)
+    #           {:ok, file_local_path}
+
+    #         {:ok, %HTTPoison.Response{status_code: status_code}} ->
+    #           {:error, "Failed to download file, status code: #{status_code}"}
+
+    #         {:error, reason} ->
+    #           {:error, reason}
+    #       end
+
+    #     {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+    #       {:error, "Failed to get file path, status code: #{status_code}, response: #{body}"}
+
+    #     {:error, reason} ->
+    #       {:error, reason}
+    #   end
+    # end
+
+
+    def process_downloaded_file(file_path, chat_id, user_id) do
+      # Implement your file processing logic here.
+      # For example, read the file, parse content, etc.
+
+      # After processing, you can send a response to the user.
+      Telegram.sendMessage("The file has been processed successfully.", chat_id)
+    end
+
+
+    def process_epub_document(file_id, chat_id) do
+      # Obtain the file path from Telegram
+      {:ok, file_path} = Library.TelegramAPI.get_file_path(@token, file_id)
+
+      # Download the file
+      {:ok, epub_content} = Library.TelegramAPI.download_file(@token, file_path)
+
+      # Save the ePub file in your library system
+      case Library.Books.save_epub_file(epub_content) do
+        {:ok, book} ->
+          # Confirm to the user that the file has been saved
+          Telegram.sendMessage("Your ePub has been successfully saved to the library.", chat_id)
+
+        {:error, reason} ->
+          # Handle errors, such as saving failures
+          Telegram.sendMessage("Failed to save the ePub file: #{inspect(reason)}", chat_id)
+      end
+    end
+
+
     def process_update(
         %{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}} =
           update
@@ -88,13 +253,25 @@ defmodule Library.TelegramPoller do
           error_response = handle_errors(exception)
           error_message =
           case error_response do
-            {:error, :case_clause_error} -> "A case clause error occurred."
-            {:error, :key_missing} -> "A required key is missing."
-            {:error, :unknown_error} -> "An unexpected error occurred."
+            {:error, :case_clause_error} -> "A case clause error occurred #{:case_clause_error}."
+            {:error, :key_missing} -> "A required key is missing ."
+            {:error, :unknown_error} -> "An unexpected error occurred #{:unknown_error}."
           end
 
           Telegram.sendMessage("An unexpected error occurred: #{error_message}", chat_id)
       end
+    end
+    def handle_errors(%CaseClauseError{term: term}) do
+      Logger.error("Encountered a case clause error with term: #{inspect(term)}")
+      {:error, :case_clause_error}
+    end
+    def handle_errors(%KeyError{key: key}) do
+      Logger.error("Key error: the key #{inspect(key)} is missing.")
+      {:error, :key_missing}
+    end
+    def handle_errors(_error) do
+      Logger.error("An unexpected error occurred on handle error.")
+      {:error, :unknown_error}
     end
   def process_update(%{"message" => message} = update) do
     process_message(message)
@@ -128,15 +305,16 @@ defmodule Library.TelegramPoller do
   end
   def process_text_message(text, chat_id, _username, _user_id) do
     case text do
-      "/list" -> process_list("/list", chat_id)
+      "/parse" -> process_parse("/parse", chat_id)
       "/intrerval" -> process_intervel("/interval", chat_id)
        _-> process_text(text, chat_id)
     end
   end
-  def process_list("/list", chat_id) do
-    list = Library.Books.list_books()
+  def process_parse("/parse", chat_id) do
+    list = Library.Contents.list_contents()
+   # book_name = Library.Contents.get_content_name(list)
     books_list = Enum.map(list, fn book ->
-      "#{book.name}#{book.data["author"]}"
+      "#{book.chapter}#{book.data["author"]}"
     end)
     send_books_list(books_list, "Here are the list of books, please select one:", chat_id)
   end

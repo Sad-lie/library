@@ -98,8 +98,8 @@ defmodule LibraryWeb.LibraryController do
           title = chapter_name
 
           changeset =
-            %Library.Schema.Book{}
-            |> Ecto.Changeset.change(%{data: processed_content, name: title})
+            %Library.Schema.Content{}
+            |> Ecto.Changeset.change(%{data: processed_content, chapter: title})
 
           case Library.Repo.insert(changeset) do
             {:ok, _record} -> IO.puts("#{title} inserted successfully.")
