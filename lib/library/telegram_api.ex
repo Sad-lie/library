@@ -24,8 +24,10 @@ defmodule Library.TelegramAPI do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         updates = decode_response(body)
         {:ok, updates}
+
       {:ok, %HTTPoison.Response{status_code: status_code}} ->
         {:error, "Failed to fetch updates. Status code: #{status_code}"}
+
       {:error, reason} ->
         {:error, reason}
     end

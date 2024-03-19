@@ -3,7 +3,7 @@ defmodule Library.Repo.Migrations.AddTelegramIdToUser do
 
   def change do
     alter table(:users) do
-      add :telegram_id , :integer
+      add :telegram_id, :integer
     end
   end
 end

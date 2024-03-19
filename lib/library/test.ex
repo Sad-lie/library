@@ -4,13 +4,15 @@ defmodule Library.Test do
 
   schema "tests" do
     field :string, :string
-    field :data, :map  # New field for the map
+    # New field for the map
+    field :data, :map
     timestamps(type: :utc_datetime)
   end
 
   def changeset(test, attrs) do
     test
-    |> cast(attrs, [:string, :data])  # Include the new field
+    # Include the new field
+    |> cast(attrs, [:string, :data])
     |> validate_required([:string, :data])
   end
 end

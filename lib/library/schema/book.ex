@@ -6,7 +6,7 @@ defmodule Library.Schema.Book do
     field :name, :string
     field :timestamp, :naive_datetime
     field :data, :map
-    #belongs_to :collection , Library.Schema.Collection
+    # belongs_to :collection , Library.Schema.Collection
 
     timestamps()
   end

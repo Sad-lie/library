@@ -6,7 +6,7 @@ defmodule Library.Schema.Content do
     field :parse, :integer
     field :paragraph, :string
     field :timestamp, :naive_datetime
-    #belongs_to :book, Library.Books
+    # belongs_to :book, Library.Books
 
     timestamps()
   end

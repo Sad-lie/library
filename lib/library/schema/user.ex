@@ -6,14 +6,14 @@ defmodule Library.Schema.User do
     field :name, :string
     field :telegram_id, :integer
     field :timestamp, :naive_datetime
-   # has_one :collection , Library.Schema.Collection
+    # has_one :collection , Library.Schema.Collection
     timestamps()
   end
 
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name,:telegram_id, :timestamp])
-    |> validate_required([:name,:telegram_id, :timestamp])
+    |> cast(attrs, [:name, :telegram_id, :timestamp])
+    |> validate_required([:name, :telegram_id, :timestamp])
   end
 end

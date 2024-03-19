@@ -29,15 +29,15 @@ defmodule Library.Application do
       # Start to serve requests, typically the last entry
       LibraryWeb.Endpoint,
       Library.TelegramPoller
-      #LibraryWeb.WebhookServer,
-     # {LibraryWeb.TelegramController, []}
-     #{Telegram.Webhook, config: webhook_config, bots: [{Libirary.Bot, bot_config}]}
+      # LibraryWeb.WebhookServer,
+      # {LibraryWeb.TelegramController, []}
+      # {Telegram.Webhook, config: webhook_config, bots: [{Libirary.Bot, bot_config}]}
     ]
+
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Library.Supervisor]
     Supervisor.start_link(children, opts)
-
   end
 
   # Tell Phoenix to update the endpoint configuration

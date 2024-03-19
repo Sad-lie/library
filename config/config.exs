@@ -10,15 +10,16 @@ import Config
 config :library,
   ecto_repos: [Library.Repo],
   generators: [timestamp_type: :utc_datetime]
+
 config :telegram,
   bot_name: "@deathreadbot",
   token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
+
 config :library, LibraryWeb.TelegramController,
   token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
-  config :library, Library.TelegramPoller,
-  token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
-  config :library, Library.TelegramBot,
-  token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
+
+config :library, Library.TelegramPoller, token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
+config :library, Library.TelegramBot, token: "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
 
 # Configures the endpoint
 # config :library, :token_counter_bot, "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
@@ -52,8 +53,8 @@ config :esbuild,
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
-config :tesla, adapter: {Tesla.Adapter.Hackney, [recv_timeout: 40_000]}
 
+config :tesla, adapter: {Tesla.Adapter.Hackney, [recv_timeout: 40_000]}
 
 # Configure tailwind (the version is required)
 config :tailwind,

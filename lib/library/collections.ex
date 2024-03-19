@@ -19,8 +19,8 @@ defmodule Library.Collections do
     |> Collection.changeset(attrs)
     |> Repo.insert()
   end
-  #add book to user
 
+  # add book to user
 
   # Update a collection
   def update_collection(%Collection{} = collection, attrs) do

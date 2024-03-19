@@ -2,6 +2,7 @@ defmodule Library.Users do
   alias Library.Repo
   alias Library.Schema.User
   import Ecto.Query, warn: false
+  alias Logger
 
   # List all users
   def list_users do
@@ -26,17 +27,22 @@ defmodule Library.Users do
     |> User.changeset(attrs)
     |> Repo.update()
   end
-  #with telegram id
+
+  # with telegram id
   def user_exists_by_telegram_id?(telegram_id) do
-    query = from(u in User,
-                 where: u.telegram_id == ^telegram_id,
-                 select: u.id)
+    IO.inspect("tuerying for telegram_id: #{telegram_id} of type #{is_integer(telegram_id)}")
+    query =
+      from(u in User,
+        where: u.telegram_id == ^telegram_id,
+        select: u.id
+      )
 
     case Repo.one(query) do
       nil -> false
       _ -> true
     end
   end
+
   # Delete a user
   def delete_user(%User{} = user) do
     Repo.delete(user)

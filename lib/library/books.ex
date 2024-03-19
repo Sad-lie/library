@@ -2,6 +2,7 @@ defmodule Library.Books do
   alias Library.Repo
   alias Library.Schema.Book
   import Ecto.Query, warn: false
+  require Logger
   # List all
   def list_books do
     Repo.all(Book)
@@ -30,7 +31,8 @@ defmodule Library.Books do
   def delete_book(%Book{} = book) do
     Repo.delete(book)
   end
-  #deelete all
+
+  # deelete all
   def delete_all(schema_module) do
     # Create a query that selects all records from the given schema
     query = from(s in schema_module, select: s)
@@ -51,42 +53,73 @@ defmodule Library.Books do
     # Finally, insert the new book into the database
     Repo.insert(changeset)
   end
-  #list books data
+
+  # list books data
   def list_data do
     Repo.all(Book)
   end
 
-   #list users books
-   def list_user_books(user_id) do
+  # list users books
+  def list_user_books(user_id) do
     user = Library.Users.get_user!(user_id)
     Repo.all(from b in Book, where: b.user_id == ^user.id)
   end
+
   def get_book_data(book_id) do
     book = Repo.get(Book, book_id)
     book.data
   end
-  # one daya book
-  def get_book_data_by_name(book_name) do
-    # Query to find a book by its name and select only the `data` field
-    query = from(b in Book,
-                 where: b.name == ^book_name,
-                 select: b.data)
 
-    # Execute the query to fetch the `data` field of the matching book
-    case Repo.one(query) do
-      nil -> {:error, "Book not found"}
-      data_map -> {:ok, data_map}
+  # one daya book
+  # def get_book_data_by_name(book_name) do
+  #   # Query to find a book by its name and select only the `data` field
+  #   query =
+  #     from(b in Book,
+  #       where: b.name == ^book_name,
+  #       select: b.data
+  #     )
+
+  #   # Execute the query to fetch the `data` field of the matching book
+  #   # case Repo.one(query) do
+  #   #   nil -> {:error, "Book not found"}
+  #   #   data_map -> {:ok, data_map}
+  #   # end
+  #   case Repo.one(query) do
+  #     nil ->
+  #       Logger.error("Book not found: #{book_name}")
+  #       {:error, "Book not found"}
+  #     data_map ->
+  #       Logger.info("Book data retrieved successfully: #{book_name}")
+  #       {:ok, data_map}
+  #   end
+
+  # enddef get_book_data_by_name(book_name) do
+    def get_book_data_by_name(book_name) do
+      query =
+        from(b in Book,
+          where: b.name == ^book_name,
+          order_by: [asc: :id],
+          select: b.data,
+          limit: 1
+        )
+
+      case Repo.all(query) do
+        [] ->
+          Logger.error("Book not found: #{book_name}")
+          {:error, "Book not found"}
+        [data_map] ->
+          Logger.info("Book data retrieved successfully: #{book_name}")
+          {:ok, data_map}
+      end
     end
-  end
 
 end
 
-
- #add book to collection
-  # def add_book_to_user_collection(user_id, book_attrs) do
-  #   user = Library.Users.get_user!(user_id)
-  #   %Book{}
-  #   |> Book.changeset(book_attrs)
-  #   |> Ecto.build_assoc(user, :books)
-  #   |> Repo.insert()
-  # end
+# add book to collection
+# def add_book_to_user_collection(user_id, book_attrs) do
+#   user = Library.Users.get_user!(user_id)
+#   %Book{}
+#   |> Book.changeset(book_attrs)
+#   |> Ecto.build_assoc(user, :books)
+#   |> Repo.insert()
+# end

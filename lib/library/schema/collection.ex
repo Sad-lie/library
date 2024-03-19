@@ -4,8 +4,8 @@ defmodule Library.Schema.Collection do
 
   schema "libraries" do
     field :timestamp, :naive_datetime
-    belongs_to :user , Library.Schema.User
-    has_many :book , Library.Schema.Book
+    belongs_to :user, Library.Schema.User
+    has_many :book, Library.Schema.Book
 
     timestamps()
   end
