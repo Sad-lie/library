@@ -1,8 +1,8 @@
 defmodule Library.Schema.Collection do
   use Ecto.Schema
   import Ecto.Changeset
-
-  schema "libraries" do
+  #schema "libraries" do
+  schema "collections" do
     field :timestamp, :naive_datetime
     belongs_to :user, Library.Schema.User
     has_many :book, Library.Schema.Book

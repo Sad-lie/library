@@ -37,6 +37,7 @@ defmodule LibraryWeb.TelegramController do
 
     Telegram.Api.request(@token, "sendMessage", params)
   end
+
   def get_file(file_id) do
     Telegram.Api.request(@token, "getFile", file_id: file_id)
   end
@@ -45,11 +46,6 @@ defmodule LibraryWeb.TelegramController do
   #   {:ok, %{"file_path" => file_path}} = Telegram.Api.request(token, "getFile", file_id: file_id)
   #   {:ok, file} = Telegram.Api.file(token, file_path)
   # end
-
-
-
-
-
 
   def sendMessage(text, chat_id),
     do:
@@ -280,29 +276,6 @@ end
 
 #   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # def get_file_info(file_id) do
 #   case fetch_file_path(file_id) do
 #     {:ok, %{"file_path" => file_path}} ->
@@ -341,51 +314,49 @@ end
 #       {:error, "HTTP request failed: #{inspect(reason)}"}
 #   end
 # end
-  # defp get_file_path(file_id) do
-  #   {:ok, response} = MyTelegramClient.get_file(file_id)
-  #   file_path = response["result"]["file_path"]
-  #   file_url = "https://api.telegram.org/file/bot#{@token}/#{file_path}"
-  #   download_file(file_url)
-  # end
+# defp get_file_path(file_id) do
+#   {:ok, response} = MyTelegramClient.get_file(file_id)
+#   file_path = response["result"]["file_path"]
+#   file_url = "https://api.telegram.org/file/bot#{@token}/#{file_path}"
+#   download_file(file_url)
+# end
 
-  # defp download_file(file_url) do
-  #   {:ok, %HTTPoison.Response{body: file_contents}} = HTTPoison.get(file_url)
-  #   File.write("path/to/save/yourfile.epub", file_contents)
-  #   # Now you can use the EPUB file as needed
-  # # end
-  # defp get_file_path(file_id) do
-  #   bot_token = System.get_env("TELEGRAM_BOT_TOKEN")
-  #   url = "https://api.telegram.org/bot#{bot_token}/getFile?file_id=#{file_id}"
+# defp download_file(file_url) do
+#   {:ok, %HTTPoison.Response{body: file_contents}} = HTTPoison.get(file_url)
+#   File.write("path/to/save/yourfile.epub", file_contents)
+#   # Now you can use the EPUB file as needed
+# # end
+# defp get_file_path(file_id) do
+#   bot_token = System.get_env("TELEGRAM_BOT_TOKEN")
+#   url = "https://api.telegram.org/bot#{bot_token}/getFile?file_id=#{file_id}"
 
-  #   case HTTPoison.get(url) do
-  #     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-  #       response = Jason.decode!(body)
-  #       if response["ok"] do
-  #         file_path = response["result"]["file_path"]
-  #         {:ok, "https://api.telegram.org/file/bot#{bot_token}/#{file_path}"}
-  #       else
-  #         {:error, :failed_to_get_file_path}
-  #       end
-  #     {:error, _reason} ->
-  #       {:error, :request_failed}
-  #   end
-  # end
+#   case HTTPoison.get(url) do
+#     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+#       response = Jason.decode!(body)
+#       if response["ok"] do
+#         file_path = response["result"]["file_path"]
+#         {:ok, "https://api.telegram.org/file/bot#{bot_token}/#{file_path}"}
+#       else
+#         {:error, :failed_to_get_file_path}
+#       end
+#     {:error, _reason} ->
+#       {:error, :request_failed}
+#   end
+# end
 
+# defp download_file(file_url) do
+#   case HTTPoison.get(file_url) do
+#     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+#       {:ok, body}
+#     {:error, _reason} ->
+#       {:error, :download_failed}
+#   end
+# end
 
-  # defp download_file(file_url) do
-  #   case HTTPoison.get(file_url) do
-  #     {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-  #       {:ok, body}
-  #     {:error, _reason} ->
-  #       {:error, :download_failed}
-  #   end
-  # end
-
-
-  # defp handle_file_contents(contents, file_name) do
-  #   File.write("path/#{file_name}", contents)
-  # end
-  #  def process_epub_file(document, chat_id) do
+# defp handle_file_contents(contents, file_name) do
+#   File.write("path/#{file_name}", contents)
+# end
+#  def process_epub_file(document, chat_id) do
 #   # Assuming `document` is always a map with at least a "file_id"
 #   file_id = document["file_id"]
 #   i =  Telegram.get_file_path(file_id)
@@ -417,7 +388,6 @@ end
 #   end
 # end
 
-
 # def handle_message(%{"document" => document} = message) do
 #   file_id = document["file_id"]
 #   file_name = document["file_name"]
@@ -441,34 +411,34 @@ end
 #       IO.puts("Failed to get file path")
 #   end
 # end
-    # def process_message(%{"document" => %{"mime_type" => "application/epub+zip"} = document,"chat" => %{"id" => chat_id}}) do
-    #     process_epub_file(document, chat_id)
-    # end
+# def process_message(%{"document" => %{"mime_type" => "application/epub+zip"} = document,"chat" => %{"id" => chat_id}}) do
+#     process_epub_file(document, chat_id)
+# end
 
-  #  def process_message(%{"document" => %{"mime_type" => "application/epub+zip"} = document,"chat" => %{"id" => chat_id}}) do
-  #     file_id = document["file_id"]
-  #     get_file_path(file_id)
-  #   end
-    # def process_message(%{"document" => %{"mime_type" => "application/epub+zip"} = document,"chat" => %{"id" => chat_id}}) do
-    #   file_id = document["file_id"]
-    #   file_name = document["file_name"]
+#  def process_message(%{"document" => %{"mime_type" => "application/epub+zip"} = document,"chat" => %{"id" => chat_id}}) do
+#     file_id = document["file_id"]
+#     get_file_path(file_id)
+#   end
+# def process_message(%{"document" => %{"mime_type" => "application/epub+zip"} = document,"chat" => %{"id" => chat_id}}) do
+#   file_id = document["file_id"]
+#   file_name = document["file_name"]
 
-    #   # Log or use the file name as needed
-    #   IO.puts("Received file: #{file_name}")
+#   # Log or use the file name as needed
+#   IO.puts("Received file: #{file_name}")
 
-    #   # Proceed to get the file path using the file_id
-    #   file_path_response = get_file_path(file_id)
+#   # Proceed to get the file path using the file_id
+#   file_path_response = get_file_path(file_id)
 
-    #   case file_path_response do
-    #     {:ok, file_path} ->
-    #       # Download and use the file
-    #       IO.puts("File path received: #{file_path}")
-    #       {:ok, file_contents} = download_file(file_path)
+#   case file_path_response do
+#     {:ok, file_path} ->
+#       # Download and use the file
+#       IO.puts("File path received: #{file_path}")
+#       {:ok, file_contents} = download_file(file_path)
 
-    #       # Assuming you have a function to handle the file contents
-    #       handle_file_contents(file_contents,file_path)
+#       # Assuming you have a function to handle the file contents
+#       handle_file_contents(file_contents,file_path)
 
-    #     {:error, _reason} ->
-    #       IO.puts("Failed to get file path")
-    #   end
-    # end
+#     {:error, _reason} ->
+#       IO.puts("Failed to get file path")
+#   end
+# end

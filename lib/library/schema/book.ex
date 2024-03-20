@@ -7,6 +7,7 @@ defmodule Library.Schema.Book do
     field :book_id, :integer
     field :timestamp, :naive_datetime
     has_many :content, Library.Schema.Content
+    belongs_to :collection, Library.Schema.Collection
 
     timestamps()
   end

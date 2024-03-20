@@ -33,4 +33,5 @@ defmodule Library.Collections do
   def delete_collection(%Collection{} = collection) do
     Repo.delete(collection)
   end
+
 end

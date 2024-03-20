@@ -40,6 +40,12 @@ defmodule Library.Books do
     # Execute the delete operation
     Repo.delete_all(query)
   end
+  def get_books_by_user_id(user_id) do
+    from(b in Book,
+      where: b.user_id == ^user_id,
+      select: b)
+    |> Repo.all()
+  end
 
   def add_book_to_user_collection(user_id, book_attrs) do
     user = Library.Users.get_user!(user_id)
@@ -64,10 +70,6 @@ defmodule Library.Books do
     user = Library.Users.get_user!(user_id)
     Repo.all(from b in Book, where: b.user_id == ^user.id)
   end
-
-
-
-
 end
 
 # add book to collection
@@ -79,31 +81,31 @@ end
 #   |> Repo.insert()
 # end
 
-  # one daya book
-  # def get_book_data_by_name(book_name) do
-  #   # Query to find a book by its name and select only the `data` field
-  #   query =
-  #     from(b in Book,
-  #       where: b.name == ^book_name,
-  #       select: b.data
-  #     )
+# one daya book
+# def get_book_data_by_name(book_name) do
+#   # Query to find a book by its name and select only the `data` field
+#   query =
+#     from(b in Book,
+#       where: b.name == ^book_name,
+#       select: b.data
+#     )
 
-  #   # Execute the query to fetch the `data` field of the matching book
-  #   # case Repo.one(query) do
-  #   #   nil -> {:error, "Book not found"}
-  #   #   data_map -> {:ok, data_map}
-  #   # end
-  #   case Repo.one(query) do
-  #     nil ->
-  #       Logger.error("Book not found: #{book_name}")
-  #       {:error, "Book not found"}
-  #     data_map ->
-  #       Logger.info("Book data retrieved successfully: #{book_name}")
-  #       {:ok, data_map}
-  #   end
+#   # Execute the query to fetch the `data` field of the matching book
+#   # case Repo.one(query) do
+#   #   nil -> {:error, "Book not found"}
+#   #   data_map -> {:ok, data_map}
+#   # end
+#   case Repo.one(query) do
+#     nil ->
+#       Logger.error("Book not found: #{book_name}")
+#       {:error, "Book not found"}
+#     data_map ->
+#       Logger.info("Book data retrieved successfully: #{book_name}")
+#       {:ok, data_map}
+#   end
 
-  # enddef get_book_data_by_name(book_name) do
- # def get_book_data(book_id) do
-  #   book = Repo.get(Book, book_id)
-  #   book.data
-  # end
+# enddef get_book_data_by_name(book_name) do
+# def get_book_data(book_id) do
+#   book = Repo.get(Book, book_id)
+#   book.data
+# end

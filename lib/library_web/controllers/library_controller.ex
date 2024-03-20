@@ -16,7 +16,8 @@ defmodule LibraryWeb.LibraryController do
 
             ext_files
             |> Enum.map(&to_string/1)
-            |> ext_xhtml() |> IO.inspect()
+            |> ext_xhtml()
+            |> IO.inspect()
             |> Enum.map(&on_files/1)
 
           {:error, reason} ->
@@ -81,6 +82,7 @@ defmodule LibraryWeb.LibraryController do
         IO.puts("Failed to read #{file_path}: #{reason}")
     end
   end
+
   def on_files(file_paths) when is_list(file_paths) do
     Enum.map(file_paths, fn file_path ->
       # Extract chapter name from file_path, assuming the chapter name is the file's base name without the extension
@@ -143,84 +145,79 @@ defmodule LibraryWeb.LibraryController do
     end
   end
 end
-  # def on_files(file_paths) when is_list(file_paths) do
-  #   Enum.with_index(file_paths, 1)
-  #   |> Enum.map(fn {file_path, _index} ->
-  #     chapter_number = extract_chapter_number(file_path)
 
-  #     case File.read(file_path) do
-  #       {:ok, content} ->
-  #         processed_content =
-  #           content
-  #           |> filter_para()  # Assuming this function filters paragraphs
-  #           #|> nolist()       # Assuming this function removes lists
-  #           #|> maper()        #
-  #           |> IO.inspect()
-  #         # Generate a chapter title using the extracted chapter number
-  #         # title = "Chapter #{chapter_number}"
-  #         # IO.puts("Preparing to insert: #{title}")  # Debug: Check title before insert
+# def on_files(file_paths) when is_list(file_paths) do
+#   Enum.with_index(file_paths, 1)
+#   |> Enum.map(fn {file_path, _index} ->
+#     chapter_number = extract_chapter_number(file_path)
 
-  #         # changeset =
-  #         #   %Library.Schema.Book{}
-  #         #   |> Ecto.Changeset.change(%{data: processed_content, name: title})
+#     case File.read(file_path) do
+#       {:ok, content} ->
+#         processed_content =
+#           content
+#           |> filter_para()  # Assuming this function filters paragraphs
+#           #|> nolist()       # Assuming this function removes lists
+#           #|> maper()        #
+#           |> IO.inspect()
+#         # Generate a chapter title using the extracted chapter number
+#         # title = "Chapter #{chapter_number}"
+#         # IO.puts("Preparing to insert: #{title}")  # Debug: Check title before insert
 
-  #         # case Library.Repo.insert(changeset) do
-  #         #   {:ok, _record} -> IO.puts("Record inserted successfully: #{title}")
-  #         #   {:error, changeset} ->
-  #         #     IO.puts("Failed to insert: #{title}")
-  #         #     IO.inspect(changeset.errors)  # More detailed error logging
-  #         # end
+#         # changeset =
+#         #   %Library.Schema.Book{}
+#         #   |> Ecto.Changeset.change(%{data: processed_content, name: title})
 
-  #       {:error, reason} ->
-  #         IO.puts("Failed to read #{file_path}: #{reason}")
-  #     end
-  #   end)
-  # end
+#         # case Library.Repo.insert(changeset) do
+#         #   {:ok, _record} -> IO.puts("Record inserted successfully: #{title}")
+#         #   {:error, changeset} ->
+#         #     IO.puts("Failed to insert: #{title}")
+#         #     IO.inspect(changeset.errors)  # More detailed error logging
+#         # end
 
-  # def extract_chapter_number(file_path) do
-  #   # Extracts numbers from the filename, assuming a format like "chapter1.xhtml"
-  #   # This is a simple regex to find numbers; adjust the pattern as necessary for your filenames.
-  #   case Regex.run(~r/\d+/, file_path) do
-  #     [number | _] -> number
-  #     _ -> "Unknown" # Fallback if no number is found
-  #   end
-  # end
+#       {:error, reason} ->
+#         IO.puts("Failed to read #{file_path}: #{reason}")
+#     end
+#   end)
+# end
 
+# def extract_chapter_number(file_path) do
+#   # Extracts numbers from the filename, assuming a format like "chapter1.xhtml"
+#   # This is a simple regex to find numbers; adjust the pattern as necessary for your filenames.
+#   case Regex.run(~r/\d+/, file_path) do
+#     [number | _] -> number
+#     _ -> "Unknown" # Fallback if no number is found
+#   end
+# end
 
+# def on_files(file_paths) when is_list(file_paths) do
+#   Enum.map(file_paths, fn file_path ->
+#     case File.read(file_path) do
+#       {:ok, content} ->
+#         processed_content =
+#           content
+#           |> filter_para()
+#           |> nolist()
+#           |> maper()
 
+#         title =
+#           filter_meta(content)
+#           |> unlist()
+#           |> clean_title()
 
+#         changeset =
+#           %Library.Schema.Book{}
+#           |> Ecto.Changeset.change(%{data: processed_content, name: title})
 
+#         case Library.Repo.insert(changeset) do
+#           {:ok, _record} -> IO.puts("Record inserted successfully.")
+#           {:error, changeset} -> IO.inspect(changeset.errors)
+#         end
 
-
-  # def on_files(file_paths) when is_list(file_paths) do
-  #   Enum.map(file_paths, fn file_path ->
-  #     case File.read(file_path) do
-  #       {:ok, content} ->
-  #         processed_content =
-  #           content
-  #           |> filter_para()
-  #           |> nolist()
-  #           |> maper()
-
-  #         title =
-  #           filter_meta(content)
-  #           |> unlist()
-  #           |> clean_title()
-
-  #         changeset =
-  #           %Library.Schema.Book{}
-  #           |> Ecto.Changeset.change(%{data: processed_content, name: title})
-
-  #         case Library.Repo.insert(changeset) do
-  #           {:ok, _record} -> IO.puts("Record inserted successfully.")
-  #           {:error, changeset} -> IO.inspect(changeset.errors)
-  #         end
-
-  #       {:error, reason} ->
-  #         IO.puts("Failed to read #{file_path}: #{reason}")
-  #     end
-  #   end)
-  # end
+#       {:error, reason} ->
+#         IO.puts("Failed to read #{file_path}: #{reason}")
+#     end
+#   end)
+# end
 # def tuple({:ok ,y}), do: y
 #   def file(list) do
 #     Enum.map(list,fn x -> File.read(x)|> tuple() |> Floki.parse_document() end)

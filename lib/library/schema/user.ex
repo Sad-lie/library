@@ -6,7 +6,7 @@ defmodule Library.Schema.User do
     field :name, :string
     field :telegram_id, :integer
     field :timestamp, :naive_datetime
-    # has_one :collection , Library.Schema.Collection
+     has_one :collection , Library.Schema.Collection
     timestamps()
   end
 

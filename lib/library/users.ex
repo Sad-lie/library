@@ -31,6 +31,7 @@ defmodule Library.Users do
   # with telegram id
   def user_exists_by_telegram_id?(telegram_id) do
     IO.inspect("tuerying for telegram_id: #{telegram_id} of type #{is_integer(telegram_id)}")
+
     query =
       from(u in User,
         where: u.telegram_id == ^telegram_id,
