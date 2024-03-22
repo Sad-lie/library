@@ -42,10 +42,10 @@ defmodule LibraryWeb.TelegramController do
     Telegram.Api.request(@token, "getFile", file_id: file_id)
   end
 
-  # def get_file_path(file_id,response) do
-  #   {:ok, %{"file_path" => file_path}} = Telegram.Api.request(token, "getFile", file_id: file_id)
-  #   {:ok, file} = Telegram.Api.file(token, file_path)
-  # end
+  def get_file_path(file_id) do
+    {:ok, %{"file_path" => file_path}} = Telegram.Api.request(@token, "getFile", file_id: file_id)
+    {:ok, file} = Telegram.Api.file(@token, file_path)
+  end
 
   def sendMessage(text, chat_id),
     do:

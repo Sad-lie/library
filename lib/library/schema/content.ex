@@ -15,7 +15,7 @@ defmodule Library.Schema.Content do
 
   def changeset(contents, attrs) do
     contents
-    |> cast(attrs, [:chapter, :timestamp, :data])
+    |> cast(attrs, [:chapter, :timestamp, :data, :book_id])
     |> validate_required([:chapter, :timestamp])
   end
 end

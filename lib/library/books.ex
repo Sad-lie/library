@@ -40,10 +40,12 @@ defmodule Library.Books do
     # Execute the delete operation
     Repo.delete_all(query)
   end
+
   def get_books_by_user_id(user_id) do
     from(b in Book,
       where: b.user_id == ^user_id,
-      select: b)
+      select: b
+    )
     |> Repo.all()
   end
 

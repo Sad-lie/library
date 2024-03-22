@@ -7,8 +7,8 @@ defmodule LibraryWeb.LibraryController do
     unzip_epub("/home/liar/Downloads/epub/one/Alices Adventures in Wonderland.epub")
   end
 
-  def unzip_epub(file_path) do
-    case File.read(file_path) do
+  def unzip_epub(file_path) when is_binary(file_path) do
+    case File.read(file_path, :binary) do
       {:ok, content} ->
         case :zip.unzip(content) do
           {:ok, ext_files} ->
@@ -24,9 +24,13 @@ defmodule LibraryWeb.LibraryController do
             {:error, "Failed to unzip EPUB: #{reason}"}
         end
 
-      {:error, reason} ->
-        {:error, "Error reading EPUB file: #{reason}"}
+     {:error, reason} ->
+      {:error, "Error reading EPUB file: #{reason}"}
     end
+  end
+  def unzip_epub(non_binary) do
+    IO.inspect(non_binary, label: "Received unexpected data type")
+    {:error, "Expected a file path string"}
   end
 
   def maper(text) do
@@ -142,6 +146,25 @@ defmodule LibraryWeb.LibraryController do
     case Floki.find(html_string, "title") do
       title_element -> Floki.text(title_element)
       _ -> "No title found"
+    end
+  end
+end
+
+defmodule LibraryWeb.MyFile do
+  def create_dir_and_write_file(dir_path, file_name, content) do
+    # Step 1: Create the directory (and any necessary parent directories)
+    case File.mkdir_p(dir_path) do
+      :ok -> IO.puts("Directory created successfully.")
+      {:error, _} = error -> IO.puts("Error creating directory: #{inspect(error)}")
+    end
+
+    # Step 2: Define the full path to the file
+    file_path = Path.join(dir_path, file_name)
+
+    # Step 3: Write content to the file
+    case File.write(file_path, content) do
+      :ok -> IO.puts("File written successfully.")
+      {:error, _} = error -> IO.puts("Error writing to file: #{inspect(error)}")
     end
   end
 end

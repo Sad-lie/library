@@ -165,8 +165,6 @@
 # end
 # end
 
-
-
 # #error handling
 # def handle_errors(%CaseClauseError{term: term}) do
 #   Logger.error("Encountered a case clause error with term: #{inspect(term)}")
@@ -184,11 +182,6 @@
 # end
 # def handle_callback_data(_chat_id) do
 # end
-
-
-
-
-
 
 # #other process
 # def process_parse("/parse", chat_id) do
@@ -220,7 +213,6 @@
 #   end
 # end
 
-
 # #funtions
 # def send_books_list(list_of_books, text_input, chat_id) do
 #   buttons = Enum.map(list_of_books, &option_maker/1)
@@ -237,12 +229,7 @@
 #   %{text: book_name, callback_data: book_name}
 # end
 
-
 # end
-
-
-
-
 
 # #   def process_update(update) do
 # #     first_name = update["message"]["from"]["first_name"]
