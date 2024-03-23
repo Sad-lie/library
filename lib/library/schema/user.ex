@@ -12,13 +12,10 @@ defmodule Library.Schema.User do
     timestamps()
   end
 
-
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :telegram_id,:first_name,:last_name, :timestamp])
+    |> cast(attrs, [:name, :telegram_id, :first_name, :last_name, :timestamp])
     |> validate_required([:name, :telegram_id, :timestamp])
-
   end
-
 end

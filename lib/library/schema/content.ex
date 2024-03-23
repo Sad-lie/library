@@ -8,7 +8,7 @@ defmodule Library.Schema.Content do
     field :timestamp, :naive_datetime
     field :data, :map
     # Uncomment and adjust if you still have a book association
-    belongs_to :book, Library.Books
+    belongs_to :book, Library.Schema.Book
 
     timestamps()
   end

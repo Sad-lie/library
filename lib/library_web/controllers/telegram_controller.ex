@@ -58,7 +58,14 @@ defmodule LibraryWeb.TelegramController do
   def intravel, do: 1000
 
   def iterate_through_map(book_name) do
-    interval = intravel()
+    latest_interval =
+      Library.Schema.Interval
+      |> Library.Repo.all()
+      |> Enum.sort_by(& &1.inserted_at, &>=/2)
+      |> List.first()
+
+    interval = latest_interval.interval
+
     book_name_string = to_string(book_name)
 
     case Library.Books.get_book_data_by_name(book_name_string) do
@@ -78,26 +85,6 @@ defmodule LibraryWeb.TelegramController do
         IO.puts("Failed to retrieve book data")
     end
   end
-
-  # {:ok, book_data} ->
-  #   # Process book data
-  #   Enum.each(book_data, fn {key, value} ->
-  #     Process.sleep(interval)
-  #     IO.puts("Key: #{key}, Value: #{value}")
-  #     text = value
-  #     Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: text, disable_notification: true)
-  #   end)
-  # {:error, reason} ->
-  #     sendMessage("An error occurred: #{inspect(reason)}", @chat_id)
-
-  # map = Library.Books.get_book_data_by_name(book_name)
-  # Enum.each(map, fn {key, value} ->
-  #  Process.sleep(interval)
-  #  IO.puts("Key: #{key}, Value: #{value}")
-  #  text = value
-  #  Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: text, disable_notification: true)
-  # end)
-  # end
 
   def keyboard(list_of_keyboard, text_option, chat_id) do
     keyboard_markup = %{one_time_keyboard: true, keyboard: list_of_keyboard}
@@ -134,27 +121,8 @@ defmodule LibraryWeb.TelegramController do
   end
 
   def option_maker(input), do: [[%{text: input, callback_data: input}]]
-  # def button(list_of_options,text_input,chat_id) do
-  #   buttons = Enum.map(list_of_options ,&option_maker/1)
-  #   keyboard_markup = %{
-  #     inline_keyboard: buttons
-  #   }
-  #   Telegram.Api.request(@token, "sendMessage", chat_id: chat_id, text: "#{text_input}", reply_markup: keyboard_markup)
-  # end
-  # def option_maker(input) ,do: [%{text: "#{input}", callback_data: "#{input}"}]
+
   def gogo do
-    # send_message("Click here to visit Google", @chat_id, %{
-    #   reply_markup: %{
-    #     inline_keyboard: [
-    #       [
-    #         %{
-    #           text: "Visit Google",
-    #           url: "https://www.google.com"
-    #         }
-    #       ]
-    #     ]
-    #   }
-    # })
     send_message("Choose an option:", @chat_id, %{
       reply_markup: %{
         inline_keyboard: [
@@ -165,15 +133,54 @@ defmodule LibraryWeb.TelegramController do
       }
     })
   end
-
-  # def list_of_books_option_make()do
-  #   reply_markup = %{
-  #   }
-  #   send_message(text , @chat_id,)
-
-  # end
 end
 
+# def button(list_of_options,text_input,chat_id) do
+#   buttons = Enum.map(list_of_options ,&option_maker/1)
+#   keyboard_markup = %{
+#     inline_keyboard: buttons
+#   }
+#   Telegram.Api.request(@token, "sendMessage", chat_id: chat_id, text: "#{text_input}", reply_markup: keyboard_markup)
+# end
+# def option_maker(input) ,do: [%{text: "#{input}", callback_data: "#{input}"}]
+
+# send_message("Click here to visit Google", @chat_id, %{
+#   reply_markup: %{
+#     inline_keyboard: [
+#       [
+#         %{
+#           text: "Visit Google",
+#           url: "https://www.google.com"
+#         }
+#       ]
+#     ]
+#   }
+# })
+# {:ok, book_data} ->
+#   # Process book data
+#   Enum.each(book_data, fn {key, value} ->
+#     Process.sleep(interval)
+#     IO.puts("Key: #{key}, Value: #{value}")
+#     text = value
+#     Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: text, disable_notification: true)
+#   end)
+# {:error, reason} ->
+#     sendMessage("An error occurred: #{inspect(reason)}", @chat_id)
+
+# map = Library.Books.get_book_data_by_name(book_name)
+# Enum.each(map, fn {key, value} ->
+#  Process.sleep(interval)
+#  IO.puts("Key: #{key}, Value: #{value}")
+#  text = value
+#  Telegram.Api.request(@token, "sendMessage", chat_id: @chat_id, text: text, disable_notification: true)
+# end)
+# end
+# def list_of_books_option_make()do
+#   reply_markup = %{
+#   }
+#   send_message(text , @chat_id,)
+
+# end
 # def handle_update(%{"message" => %{"document" => document}} = _update) do
 #   # Extract the MIME type and file ID from the document
 #   mime_type = document["mime_type"]

@@ -14,7 +14,7 @@
 #   end
 # end
 defmodule Library.TelegramAPI do
-  #https://api.telegram.org/file/bot6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho/documents/file_13.epub
+  # https://api.telegram.org/file/bot6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho/documents/file_13.epub
   @api_url "https://api.telegram.org"
   @chat_id 977_236_716
   @token "6572036459:AAHCV5wzjPtrq1nBzodbzhDpkROpZkHQrho"
@@ -36,9 +36,10 @@ defmodule Library.TelegramAPI do
   end
 
   def documents(file_path) do
-    #url = "#{@api_url}#{@token}/getDocument"
+    # url = "#{@api_url}#{@token}/getDocument"
     # https://api.telegram.org/file/bot<token>
     url = "#{@api_url}/file/bot#{@token}/#{file_path}"
+
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         updates = decode_response(body)
@@ -49,8 +50,9 @@ defmodule Library.TelegramAPI do
 
       {:error, reason} ->
         {:error, reason}
-      end
+    end
   end
+
   # Helper function to decode the response body
   defp decode_response(body) do
     body

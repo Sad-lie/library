@@ -4,7 +4,13 @@ defmodule LibraryWeb.LibraryController do
   alias Library.Users
 
   def start do
-    unzip_epub("/home/liar/Downloads/epub/one/Alices Adventures in Wonderland.epub")
+    #  unzip_epub("/home/liar/Downloads/epub/one/Alices Adventures in Wonderland.epub")
+    latest_interval =
+      Library.Schema.Interval
+      |> Library.Repo.all()
+      |> Enum.sort_by(& &1.inserted_at, &>=/2)
+      |> List.first()
+      |> IO.inspect()
   end
 
   def unzip_epub(file_path) when is_binary(file_path) do
@@ -24,10 +30,11 @@ defmodule LibraryWeb.LibraryController do
             {:error, "Failed to unzip EPUB: #{reason}"}
         end
 
-     {:error, reason} ->
-      {:error, "Error reading EPUB file: #{reason}"}
+      {:error, reason} ->
+        {:error, "Error reading EPUB file: #{reason}"}
     end
   end
+
   def unzip_epub(non_binary) do
     IO.inspect(non_binary, label: "Received unexpected data type")
     {:error, "Expected a file path string"}

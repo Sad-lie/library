@@ -61,20 +61,56 @@ defmodule Library.TelegramPoller do
 
   # process update
 
+  def process_update(
+        %{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}} =
+          update
+      ) do
+    # response_message = handle_callback_data(data, chat_id)
+    IO.inspect(data)
+    undata = String.split(data)
+    IO.inspect(undata)
+    # Telegram.sendMessage("#{update}", chat_id)
+    case undata do
+      ["/interval", interval_string] ->
+        interval_string
+        |> String.trim()
+        |> String.to_integer()
+        |> handle_callback_interval(chat_id)
 
-  def process_update(%{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}}) do
-    response_message = handle_callback_data(data, chat_id)
-    Telegram.sendMessage(response_message, chat_id)
+      _ ->
+        Telegram.sendMessage("Invalid interval value. Please try again.", chat_id)
+    end
   end
 
-  def process_update(
-  %{"message" => %{"chat" => %{"first_name" => first_name,"id" => chat_id,"last_name" => last_name,"username" => username},"text" => text}})do
-    process_text_message(text, chat_id, first_name, last_name, username, chat_id)
-    end
   def process_update(%{
         "message" => %{
-          "chat" => %{"first_name" => first_name, "id" => chat_id, "last_name" => last_name,"username" => username},
-          "document" => %{"file_id" => file_id,"file_name" => file_name,"mime_type" => "application/epub+zip"}}}) do
+          "chat" => %{
+            "first_name" => first_name,
+            "id" => chat_id,
+            "last_name" => last_name,
+            "username" => username
+          },
+          "text" => text
+        }
+      }) do
+    process_text_message(text, chat_id, first_name, last_name, username, chat_id)
+  end
+
+  def process_update(%{
+        "message" => %{
+          "chat" => %{
+            "first_name" => first_name,
+            "id" => chat_id,
+            "last_name" => last_name,
+            "username" => username
+          },
+          "document" => %{
+            "file_id" => file_id,
+            "file_name" => file_name,
+            "mime_type" => "application/epub+zip"
+          }
+        }
+      }) do
     Telegram.get_file(file_id)
     |> case do
       {:ok, %{"file_path" => file_path}} ->
@@ -87,27 +123,43 @@ defmodule Library.TelegramPoller do
           {:ok, %HTTPoison.Response{body: data}} ->
             local_file_path = Path.join(["lib", "library", "files", file_name])
             write_file(local_file_path, data)
-            user_id = 2 #Library.Users.get_user_telegram_id_by_name(username)
+            {:ok, decimal}  =  Library.Users.get_user_telegram_id_by_name(username)
+            user_id = Decimal.to_integer(decimal)
+            IO.inspect(user_id)
+
             changeset =
-            %Library.Schema.Book{}
-            |> Ecto.Changeset.change(%{ name: file_name, user_id: user_id})
+              %Library.Schema.Book{}
+              |> Ecto.Changeset.change(%{name: file_name, user_id: 1})
+
             IO.inspect(changeset)
-          case Library.Repo.insert(changeset) do
-            {:ok, _record} -> Telegram.sendMessage("#{first_name} inserted #{file_name} successfully.", chat_id)
-            {:error, changeset} -> IO.inspect(changeset.errors)
-          end
+
+            case Library.Repo.insert(changeset) do
+              {:ok, _record} ->
+                Telegram.sendMessage("#{first_name} inserted #{file_name} successfully.", chat_id)
+
+              {:error, changeset} ->
+                IO.inspect(changeset.errors)
+            end
         end
-        {:error, %HTTPoison.Error{reason: :timeout}} ->
-          Telegram.sendMessage("Request timed out. Please try again later.", chat_id)
-        {:error, error} ->
-          IO.inspect(error, label: "Unexpected Error")
+
+      {:error, %HTTPoison.Error{reason: :timeout}} ->
+        Telegram.sendMessage("Request timed out. Please try again later.", chat_id)
+
+      {:error, error} ->
+        IO.inspect(error, label: "Unexpected Error")
     end
-     |> LibraryWeb.LibraryController.unzip_epub()
+    |> LibraryWeb.LibraryController.unzip_epub()
   end
-  def process_update(%{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}}) do
+
+  def process_update(
+        %{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}} =
+          updater
+      ) do
+    IO.inspect(updater)
+
     case String.split(data) do
-      ["/interval", interval_string] ->
-        handle_callback_data("/interval " <> interval_string, chat_id)
+      "/interval" <> interval_string ->
+        handle_callback_interval("/interval " <> interval_string, chat_id)
 
       _ ->
         response_message = "You selected: #{data}"
@@ -117,6 +169,7 @@ defmodule Library.TelegramPoller do
           case Telegram.iterate_through_map(data) do
             :ok ->
               Telegram.iterate_through_map(data)
+
             _ ->
               Telegram.sendMessage("Nothing Left...", chat_id)
           end
@@ -125,55 +178,24 @@ defmodule Library.TelegramPoller do
             Logger.error("Error processing update: #{inspect(exception)}")
 
             error_response = handle_errors(exception)
-            error_message = case error_response do
-              {:error, :case_clause_error} -> "A case clause error occurred."
-              {:error, :key_missing} -> "A required key is missing."
-              {:error, :unknown_error} -> "An unexpected error occurred."
-            end
+
+            error_message =
+              case error_response do
+                {:error, :case_clause_error} -> "A case clause error occurred."
+                {:error, :key_missing} -> "A required key is missing."
+                {:error, :unknown_error} -> "An unexpected error occurred."
+              end
 
             Telegram.sendMessage("An unexpected error occurred: #{error_message}", chat_id)
         end
     end
   end
 
-  # def process_update(%{"callback_query" => %{"data" => interval_string, "message" => %{"chat" => %{"id" => chat_id}}}}) do
-  #   case Integer.parse(interval_string) do
-  #     {interval, _} ->
-  #       Telegram.sendMessage("Interval updated to #{interval} seconds.", chat_id)
-  #       update_interval(interval)
-  #     :error ->
-  #       Telegram.sendMessage("Invalid interval value. Please try again.", chat_id)
-  #   end
-  # end
-  # def process_update(%{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}}) do
-  #   response_message = "You selected: #{data}"
-  #   Telegram.sendMessage(response_message, chat_id)
 
-  #   try do
-  #     case Telegram.iterate_through_map(data) do
-  #       :ok ->
-  #         Telegram.iterate_through_map(data)
-  #       _ ->
-  #         Telegram.sendMessage("Nothing Left...", chat_id)
-  #     end
-  #   rescue
-  #     exception ->
-  #       Logger.error("Error processing update: #{inspect(exception)}")
-
-  #       error_response = handle_errors(exception)
-  #       error_message = case error_response do
-  #         {:error, :case_clause_error} -> "A case clause error occurred."
-  #         {:error, :key_missing} -> "A required key is missing."
-  #         {:error, :unknown_error} -> "An unexpected error occurred."
-  #       end
-
-  #       Telegram.sendMessage("An unexpected error occurred: #{error_message}", chat_id)
-  #   end
-  # end
   def process_update(%{"edited_message" => edited_message} = update) do
     # Handle the edited message update here
     IO.inspect(edited_message, label: "Edited Message")
-  #  {:noreply, Map.put(state, :last_update_id, update["update_id"])}
+    #  {:noreply, Map.put(state, :last_update_id, update["update_id"])}
   end
 
   def handle_callback_data("/parse", chat_id) do
@@ -181,16 +203,20 @@ defmodule Library.TelegramPoller do
     books_list = Enum.map(list, fn book -> "#{book.chapter}#{book.data["author"]}" end)
     send_books_list(books_list, "Here are the list of Chapters, please select one:", chat_id)
   end
-  def handle_callback_data("/interval " <> interval_string, chat_id) do
-    case Integer.parse(interval_string) do
-      {interval, _} ->
-        update_interval(interval)
-        Telegram.sendMessage("Interval updated to #{interval} seconds.", chat_id)
-      :error ->
-        Telegram.sendMessage("Invalid interval value. Please try again.", chat_id)
+
+  def handle_callback_interval(interval_string, chat_id) do
+    attr = %{"interval" => interval_string}
+
+    case Library.Intervals.update_or_create_interval(attr) do
+      {:ok, interval} ->
+        IO.inspect(interval)
+        Telegram.sendMessage("Interval updated to #{interval_string} seconds.", chat_id)
+
+      _ ->
+        # Handle unexpected return values or errors
+        IO.puts("Error updating or creating interval.")
     end
   end
-
 
   def handle_callback_data("/list", chat_id, user_id) do
     books = Library.Books.get_books_by_user_id(user_id)
@@ -198,10 +224,9 @@ defmodule Library.TelegramPoller do
     send_books_list(list, "Here are the list of books, please select one:", chat_id)
   end
 
+  # process_messages / others
 
-  #process_messages / others
-
-  def process_text_message(text, chat_id,first_name,last_name, username, user_id) do
+  def process_text_message(text, chat_id, first_name, last_name, username, user_id) do
     case text do
       "/parse" -> process_parse("/parse", chat_id)
       "/list" -> process_list("/list", chat_id, user_id)
@@ -213,9 +238,12 @@ defmodule Library.TelegramPoller do
 
   def process_list("/list", chat_id, user_id) do
     books = Library.Books.get_books_by_user_id(user_id)
-
+    IO.inspect(books)
     if Enum.empty?(books) do
-      Telegram.sendMessage("You haven't added any books yet. Please upload a book first.", chat_id)
+      Telegram.sendMessage(
+        "You haven't added any books yet. Please upload a book first.",
+        chat_id
+      )
     else
       list = Enum.map(books, fn book -> book["name"] end)
       send_books_list(list, "Here are the list of books, please select one:", chat_id)
@@ -224,9 +252,12 @@ defmodule Library.TelegramPoller do
 
   def process_parse("/parse", chat_id) do
     list = Library.Contents.list_contents()
-
+    IO.inspect(list)
     if Enum.empty?(list) do
-      Telegram.sendMessage("There are no chapters available. Please upload a book first.", chat_id)
+      Telegram.sendMessage(
+        "There are no chapters available. Please upload a book first.",
+        chat_id
+      )
     else
       books_list =
         Enum.map(list, fn book ->
@@ -236,9 +267,21 @@ defmodule Library.TelegramPoller do
       send_books_list(books_list, "Here are the list of Chapters, please select one:", chat_id)
     end
   end
+
   def process_intervel("/interval", chat_id) do
     interval_options = ["5", "30", "60", "300", "1800", "3600", "7200", "14400"]
-    interval_labels = ["5 Sec", "30 Sec", "60 Sec", "5 Mins", "30 Mins", "60 Mins", "2 Hrs", "4 Hrs"]
+
+    interval_labels = [
+      "5 Sec",
+      "30 Sec",
+      "60 Sec",
+      "5 Mins",
+      "30 Mins",
+      "60 Mins",
+      "2 Hrs",
+      "4 Hrs"
+    ]
+
     send_interval_options(interval_options, interval_labels, "Select the interval:", chat_id)
   end
 
@@ -263,6 +306,7 @@ defmodule Library.TelegramPoller do
       {:ok, response} ->
         message_text = Map.get(response, "text", "Unknown")
         LibraryWeb.TelegramController.sendMessage(message_text, chat_id)
+
       {:error, reason} ->
         Logger.error("Failed to send message: #{inspect(reason)}")
         :error
@@ -276,20 +320,27 @@ defmodule Library.TelegramPoller do
   def update_interval(new_interval) do
     # Update the interval in your application state or configuration
     # Example:
-     Application.put_env(:library, :interval, new_interval)
+    Application.put_env(:library, :interval, new_interval)
   end
 
   def process_text(text, chat_id) do
     send_echo(text, chat_id)
   end
 
-  def process_start("/start", chat_id,first_name,last_name, username, user_id) do
+  def process_start("/start", chat_id, first_name, last_name, username, user_id) do
     case Library.Users.user_exists_by_telegram_id?(user_id) do
       false ->
         current_time = DateTime.utc_now() |> DateTime.to_string()
         collection_id = :rand.uniform(1000_000_000) |> Kernel.+(user_id)
 
-        user_attrs = %{"telegram_id" => user_id, "name" => username,"first_name"=> first_name,"last_name"=> last_name, "timestamp" => current_time}
+        user_attrs = %{
+          "telegram_id" => user_id,
+          "name" => username,
+          "first_name" => first_name,
+          "last_name" => last_name,
+          "timestamp" => current_time
+        }
+
         IO.inspect(user_attrs)
 
         {:ok, user} = Library.Users.create_user(user_attrs)
@@ -306,10 +357,12 @@ defmodule Library.TelegramPoller do
         )
 
       true ->
-        Telegram.sendMessage("Hey #{first_name} #{last_name} Welcome back to the Library Bot.", chat_id)
+        Telegram.sendMessage(
+          "Hey #{first_name} #{last_name} Welcome back to the Library Bot.",
+          chat_id
+        )
     end
   end
-
 
   def new do
     process_update(%{
@@ -347,17 +400,17 @@ defmodule Library.TelegramPoller do
   end
 
   def download_epub(file_url) do
-      case HTTPoison.get(file_url) do
-        {:ok, %HTTPoison.Response{status_code: 200, body: file_content}} ->
-          # Save the file content to the desired location
-          save_file(file_content)
+    case HTTPoison.get(file_url) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: file_content}} ->
+        # Save the file content to the desired location
+        save_file(file_content)
 
-        {:ok, %HTTPoison.Response{status_code: status_code}} ->
-          {:error, "HTTP Error: #{status_code}"}
+      {:ok, %HTTPoison.Response{status_code: status_code}} ->
+        {:error, "HTTP Error: #{status_code}"}
 
-        {:error, %HTTPoison.Error{reason: reason}} ->
-          {:error, "Error: #{inspect(reason)}"}
-      end
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        {:error, "Error: #{inspect(reason)}"}
+    end
   end
 
   def save_file(file_content) do
@@ -375,9 +428,6 @@ defmodule Library.TelegramPoller do
       {:error, reason} -> IO.puts("Error writing to file: #{inspect(reason)}")
     end
   end
-
-
-
 
   # error handling
   def handle_errors(%CaseClauseError{term: term}) do
@@ -400,13 +450,9 @@ defmodule Library.TelegramPoller do
 
   # other process
 
-
-
-
   def send_echo(text, chat_id) do
     Telegram.sendMessage("Did you just said: #{text}", chat_id)
   end
-
 
   # funtions
 
@@ -425,15 +471,51 @@ defmodule Library.TelegramPoller do
     %{text: book_name, callback_data: book_name}
   end
 end
-  # def process_callback_query(%{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}) do
-  #   case data do
-  #     "some_callback_data" ->
-  #       handle_callback_data(chat_id)
 
-  #     _ ->
-  #       :ok
+ # def process_update(%{"callback_query" => %{"data" => interval_string, "message" => %{"chat" => %{"id" => chat_id}}}}) do
+  #   case Integer.parse(interval_string) do
+  #     {interval, _} ->
+  #       Telegram.sendMessage("Interval updated to #{interval} seconds.", chat_id)
+  #       update_interval(interval)
+  #     :error ->
+  #       Telegram.sendMessage("Invalid interval value. Please try again.", chat_id)
   #   end
   # end
+  # def process_update(%{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}}) do
+  #   response_message = "You selected: #{data}"
+  #   Telegram.sendMessage(response_message, chat_id)
+
+  #   try do
+  #     case Telegram.iterate_through_map(data) do
+  #       :ok ->
+  #         Telegram.iterate_through_map(data)
+  #       _ ->
+  #         Telegram.sendMessage("Nothing Left...", chat_id)
+  #     end
+  #   rescue
+  #     exception ->
+  #       Logger.error("Error processing update: #{inspect(exception)}")
+
+  #       error_response = handle_errors(exception)
+  #       error_message = case error_response do
+  #         {:error, :case_clause_error} -> "A case clause error occurred."
+  #         {:error, :key_missing} -> "A required key is missing."
+  #         {:error, :unknown_error} -> "An unexpected error occurred."
+  #       end
+
+  #       Telegram.sendMessage("An unexpected error occurred: #{error_message}", chat_id)
+  #   end
+  # end
+
+# def process_callback_query(%{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}) do
+#   case data do
+#     "some_callback_data" ->
+#       handle_callback_data(chat_id)
+
+#     _ ->
+#       :ok
+#   end
+# end
 # sendDocument([
 #   'chat_id' => 'CHAT_ID',
 #   'document' => 'path/to/document.pdf',
@@ -590,40 +672,27 @@ end
 #   end
 # end
 
+# def process_update(%{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}} = update) do
+#   IO.inspect(update)
+# end
 
+# %{
+#   "callback_query" => %{
+#     "data" => "chapter05",
+#     "from" => %{
+#       "first_name" => first_name,
+#       "id" => chat_id,
+#       "last_name" => last_name,
+#       "username" => username
+#     },
+#       "reply_markup" => %{
+#         "inline_keyboard" => [
 
-
-
-
-
-
-  # def process_update(%{"callback_query" => %{"data" => data, "message" => %{"chat" => %{"id" => chat_id}}}} = update) do
-  #   IO.inspect(update)
-  # end
-
-  # %{
-  #   "callback_query" => %{
-  #     "data" => "chapter05",
-  #     "from" => %{
-  #       "first_name" => first_name,
-  #       "id" => chat_id,
-  #       "last_name" => last_name,
-  #       "username" => username
-  #     },
-  #       "reply_markup" => %{
-  #         "inline_keyboard" => [
-
-  #         ]
-  #       },
-  #       "text" => "Here are the list of Chapters, please select one:"
-  #     }
-  #   }
-
-
-
-
-
-
+#         ]
+#       },
+#       "text" => "Here are the list of Chapters, please select one:"
+#     }
+#   }
 
 # %{
 #   "message" => %{
@@ -638,8 +707,6 @@ end
 #     "text" => text
 #   }
 # }
-
-
 
 # %{
 #   "callback_query" => %{
