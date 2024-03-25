@@ -40,14 +40,23 @@ defmodule Library.Books do
     # Execute the delete operation
     Repo.delete_all(query)
   end
-
   def get_books_by_user_id(user_id) do
-    from(b in Book,
-      where: b.user_id == ^user_id,
-      select: b
-    )
-    |> Repo.all()
+    # Query the database or data source to retrieve books for the given user_id
+    # Example: Assuming there is a Book schema and a User-Book association
+    books = Book
+            |> where([b], b.user_id == ^user_id)
+            |> Repo.all()
+
+    # Return the list of books
+    books
   end
+  # def get_books_by_user_id(user_id) do
+  #   from(b in Book,
+  #     where: b.user_id == ^user_id,
+  #     select: b
+  #   )
+  #   |> Repo.all()
+  # end
 
   def add_book_to_user_collection(user_id, book_attrs) do
     user = Library.Users.get_user!(user_id)

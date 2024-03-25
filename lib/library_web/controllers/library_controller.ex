@@ -3,20 +3,80 @@ defmodule LibraryWeb.LibraryController do
 
   alias Library.Users
 
-  def start do
-    #  unzip_epub("/home/liar/Downloads/epub/one/Alices Adventures in Wonderland.epub")
-    latest_interval =
-      Library.Schema.Interval
-      |> Library.Repo.all()
-      |> Enum.sort_by(& &1.inserted_at, &>=/2)
-      |> List.first()
-      |> IO.inspect()
-  end
 
+    def start do
+      unzip_epub("/home/liar/elixir/projects/library/lib/library/files/the-idiot.epub")
+    end
+
+    def unzip_epub(file_path) when is_binary(file_path) do
+      case File.read(file_path) do
+        {:ok, content} ->
+          case :zip.extract(content) do
+            {:ok, ext_files} ->
+              IO.puts("EPUB successfully unzipped!")
+
+              ext_files
+              |> Enum.map(&to_string/1)
+              |> ext_xhtml()
+              |> IO.inspect()
+              |> Enum.map(&on_files/1)
+
+            {:error, reason} ->
+              {:error, "Failed to unzip EPUB: #{reason}"}
+          end
+
+        {:error, reason} ->
+          {:error, "Error reading EPUB file: #{reason}"}
+      end
+    end
+  # def unzip_epub(file_path) when is_binary(file_path) do
+  #   case File.read(file_path, :binary) do
+  #     {:ok, content} ->
+  #       case :zip.unzip(content) do
+
+  #         {:ok, ext_files} ->
+  #           IO.puts("EPUB successfully unzipped!")
+
+  #           ext_files
+  #           |> Enum.map(&to_string/1)
+  #           |> ext_xhtml()
+  #           |> IO.inspect()
+  #           |> Enum.map(&on_files/1)
+
+  #         {:error, reason} ->
+  #           {:error, "Failed to unzip EPUB: #{reason}"}
+  #       end
+
+  #     {:error, reason} ->
+  #       {:error, "Error reading EPUB file: #{reason}"}
+  #   end
+  # end
+
+  #   case File.read(file_path) do
+  #     {:ok, content} ->
+  #       case :zip.unzip(content) do
+  #         {:ok, ext_files} ->
+  #           IO.puts("EPUB successfully unzipped!")
+
+  #           ext_files
+  #           |> Enum.map(&to_string/1)
+  #           |> ext_xhtml()
+  #           |> IO.inspect()
+  #           |> Enum.map(&on_files/1)
+
+  #         {:error, reason} ->
+  #           {:error, "Failed to unzip EPUB: #{reason}"}
+  #       end
+
+  #     {:error, reason} ->
+  #       {:error, "Error reading EPUB file: #{reason}"}
+  #   end
+  # end
   def unzip_epub(file_path) when is_binary(file_path) do
     case File.read(file_path, :binary) do
       {:ok, content} ->
         case :zip.unzip(content) do
+
           {:ok, ext_files} ->
             IO.puts("EPUB successfully unzipped!")
 

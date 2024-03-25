@@ -26,6 +26,7 @@ defmodule LibraryWeb.TelegramController do
     #  "start / pause"
   end
 
+  @spec send_message(any(), any()) :: none()
   def send_message(text, chat_id, opts \\ %{}) do
     params =
       %{
@@ -55,7 +56,7 @@ defmodule LibraryWeb.TelegramController do
         disable_notification: true
       )
 
-  def intravel, do: 1000
+
 
   def iterate_through_map(book_name) do
     latest_interval =

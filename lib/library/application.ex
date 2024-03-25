@@ -28,7 +28,8 @@ defmodule Library.Application do
       # {Library.Worker, arg},
       # Start to serve requests, typically the last entry
       LibraryWeb.Endpoint,
-      Library.TelegramPoller
+
+      {Library.TelegramPoller, []}
       # LibraryWeb.WebhookServer,
       # {LibraryWeb.TelegramController, []}
       # {Telegram.Webhook, config: webhook_config, bots: [{Libirary.Bot, bot_config}]}
