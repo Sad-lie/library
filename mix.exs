@@ -23,7 +23,6 @@ defmodule Library.MixProject do
     ]
   end
 
-
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
@@ -56,7 +55,8 @@ defmodule Library.MixProject do
       {:telegram, github: "visciang/telegram", tag: "1.2.1"},
       {:tesla, "~> 1.2"},
       {:hackney, "~> 1.12"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:poison, "~> 5.0"}
     ]
   end
 
