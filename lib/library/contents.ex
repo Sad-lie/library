@@ -116,6 +116,14 @@ defmodule Library.Contents do
     Repo.all(Content)
   end
 
+  def list_content(chat_id) do
+    IO.inspect(chat_id)
+    new_chat_id = to_string(chat_id)
+    IO.inspect(new_chat_id)
+    query = from(r in Content, where: r.telegram_id == ^new_chat_id, select: r.id)
+    Repo.all(query)
+  end
+
   # Get a single content
   def get_content!(id) do
     Repo.get!(Content, id)
@@ -127,7 +135,26 @@ defmodule Library.Contents do
     |> Content.changeset(attrs)
     |> Repo.insert()
   end
+  def update_missing_parts(params) do
+    IO.inspect(params)
+    Content
+    |> Repo.all()
+    |> IO.inspect()
+    |> Enum.map(&update_record(&1, params))
+    |> IO.inspect()
+  end
 
+  defp update_record(content, params) do
+    update_attrs = %{
+      book_id: params["book_id"],
+      telegram_id: params["telegram_id"],
+      timestamp: NaiveDateTime.utc_now() # Set the timestamp to the current time
+    }
+
+    content
+    |> Content.changeset(update_attrs)
+    |> Repo.update()
+  end
   # Update a content
   def update_content(%Content{} = content, attrs) do
     content

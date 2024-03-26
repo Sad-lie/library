@@ -1,33 +1,84 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<package version="3.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="bookid" prefix="ibooks: http://vocabulary.itunes.apple.com/rdf/ibooks/vocabulary-extensions-1.0/">
-	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
-		<meta name="generator" content="Adobe InDesign 12.1" />
-		<meta name="cover" content="x1.png" />
-		<meta property="ibooks:specified-fonts">true</meta>
-		<dc:title>The Idiot</dc:title>
-		<dc:date>2018-02-21T05:48:43Z</dc:date>
-		<dc:language>en-US</dc:language>
-		<meta property="dcterms:modified">2018-02-21T05:48:43Z</meta>
-		<dc:identifier id="bookid">urn:uuid:29d919dd-24f5-4384-be78-b447c9dc299b</dc:identifier>
-	</metadata>
-	<manifest>
-		<item id="cover" href="cover.xhtml" media-type="application/xhtml+xml" />
-		<item id="The_Idiot" href="The_Idiot.xhtml" media-type="application/xhtml+xml" />
-		<item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
-		<item id="toc" href="toc.xhtml" media-type="application/xhtml+xml" properties="nav" />
-		<item id="idGeneratedStyles.css" href="css/idGeneratedStyles.css" media-type="text/css" />
-		<item id="The_idiot.png" href="image/The_idiot.png" media-type="image/png" />
-		<item id="x1.png" href="image/1.png" media-type="image/png" properties="cover-image" />
-		<item id="MinionPro-CnIt.otf" href="font/MinionPro-CnIt.otf" media-type="application/vnd.ms-opentype" />
-		<item id="MinionPro-BoldDisp.otf" href="font/MinionPro-BoldDisp.otf" media-type="application/vnd.ms-opentype" />
-		<item id="MinionPro-Regular.otf" href="font/MinionPro-Regular.otf" media-type="application/vnd.ms-opentype" />
-		<item id="MinionPro-MediumDisp.otf" href="font/MinionPro-MediumDisp.otf" media-type="application/vnd.ms-opentype" />
-	</manifest>
-	<spine toc="ncx">
-		<itemref idref="cover" linear="no" />
-		<itemref idref="The_Idiot" />
-	</spine>
-	<guide>
-		<reference type="cover" href="cover.xhtml" title="Cover" />
-	</guide>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookISBN" version="3.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title id="id">Fatal Conveniences</dc:title>
+    <dc:creator id="id-2">Darin Olien</dc:creator>
+    <dc:identifier>calibre:2318</dc:identifier>
+    <dc:identifier>uuid:ab3c530c-71bb-411f-8ebf-4d7ed6f5f3b1</dc:identifier>
+    <dc:identifier id="BookISBN">9780063114531</dc:identifier>
+    <dc:rights>Copyright © 2023 by Darin Olien. All rights reserved under International and Pan-American Copyright Conventions.</dc:rights>
+    <dc:language>en</dc:language>
+    <dc:contributor id="id-1">calibre (6.19.1) [https://calibre-ebook.com]</dc:contributor>
+    <dc:description>&lt;p&gt;&lt;strong&gt;The New York Times bestselling author of SuperLife and cohost with Zac Efron of the hit Netflix series Down to Earth, Darin Olien offers invaluable advice for addressing the health of our bodies and the health of the planet by identifying common products and behaviors that are harmful and providing alternatives that are non-toxic and life-enhancing.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Fatal conveniences are the toxic products we routinely use and the unhealthy things we do that our culture and corporations have made us believe are safe and necessary for living well and efficiently. These things&amp;#8212;from deodorant, cosmetics, dental floss, and sunscreen to laundry detergent, air fresheners, carpets, and crayons to candles, tea bags, cell phones, and chewing gum&amp;#8212;are ubiquitous in daily life . . . and they are wreaking havoc on our health and our planet. The environmental toxins found in these products create a cascade of problems, including chemical sensitivities, auto-immune issues,...</dc:description>
+    <dc:publisher>HarperCollins</dc:publisher>
+    <opf:meta refines="#id" property="title-type">main</opf:meta>
+    <opf:meta refines="#id" property="file-as">Fatal Conveniences</opf:meta>
+    <meta property="identifier-type" refines="#BookISBN">ISBN</meta>
+    <meta property="dcterms:modified">2023-04-04T21:45:00Z</meta>
+    <meta content="1.8.0" name="Sigil version"/>
+    <opf:meta refines="#id-1" property="role" scheme="marc:relators">bkp</opf:meta>
+    <opf:meta refines="#id-2" property="role" scheme="marc:relators">aut</opf:meta>
+    <opf:meta refines="#id-2" property="file-as">Olien, Darin</opf:meta>
+  </metadata>
+  <manifest>
+    <item href="Text/Cover.xhtml" id="Cover.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Titlepage.xhtml" id="Titlepage.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Dedication.xhtml" id="Dedication.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Contents.xhtml" id="Contents.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Introduction.xhtml" id="Introduction.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH001.xhtml" id="CH001.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH002.xhtml" id="CH002.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH003.xhtml" id="CH003.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH004.xhtml" id="CH004.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH005.xhtml" id="CH005.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH006.xhtml" id="CH006.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH007.xhtml" id="CH007.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH008.xhtml" id="CH008.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH009.xhtml" id="CH009.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/CH010.xhtml" id="CH010.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Acknowledgments.xhtml" id="Acknowledgments.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/ANoteOnSources.xhtml" id="ANoteOnSources.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Index.xhtml" id="Index.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/AboutTheAuthor.xhtml" id="AboutTheAuthor.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Alsoby.xhtml" id="Alsoby.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Bookperk.xhtml" id="Bookperk.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/Copyright.xhtml" id="Copyright.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/AboutThePublisher.xhtml" id="AboutThePublisher.xhtml" media-type="application/xhtml+xml"/>
+    <item href="Text/nav.xhtml" id="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item href="ncx/toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="Styles/FatalConveniences.css" id="FatalConveniences.css" media-type="text/css"/>
+    <item href="Images/Bookperk.jpg" id="Bookperk.jpg" media-type="image/jpeg"/>
+    <item href="Images/Cover.jpg" id="Cover.jpg" media-type="image/jpeg"/>
+    <item href="Images/Title.png" id="Title.png" media-type="image/png"/>
+    <item href="OEBPS/cover.jpg" id="cover" media-type="image/jpeg" properties="cover-image"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="Cover.xhtml"/>
+    <itemref idref="Titlepage.xhtml"/>
+    <itemref idref="Dedication.xhtml"/>
+    <itemref idref="Contents.xhtml"/>
+    <itemref idref="Introduction.xhtml"/>
+    <itemref idref="CH001.xhtml"/>
+    <itemref idref="CH002.xhtml"/>
+    <itemref idref="CH003.xhtml"/>
+    <itemref idref="CH004.xhtml"/>
+    <itemref idref="CH005.xhtml"/>
+    <itemref idref="CH006.xhtml"/>
+    <itemref idref="CH007.xhtml"/>
+    <itemref idref="CH008.xhtml"/>
+    <itemref idref="CH009.xhtml"/>
+    <itemref idref="CH010.xhtml"/>
+    <itemref idref="Acknowledgments.xhtml"/>
+    <itemref idref="ANoteOnSources.xhtml"/>
+    <itemref idref="Index.xhtml"/>
+    <itemref idref="AboutTheAuthor.xhtml"/>
+    <itemref idref="Alsoby.xhtml"/>
+    <itemref idref="Bookperk.xhtml"/>
+    <itemref idref="Copyright.xhtml"/>
+    <itemref idref="AboutThePublisher.xhtml"/>
+  </spine>
+  <guide>
+    <reference href="Text/Cover.xhtml" title="Cover" type="cover"/>
+    <reference href="Text/Titlepage.xhtml" title="Text" type="text"/>
+    <reference href="Text/Contents.xhtml" title="Table of Contents" type="toc"/>
+  </guide>
 </package>

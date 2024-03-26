@@ -7,8 +7,24 @@ defmodule Library.Books do
   def list_books do
     Repo.all(Book)
   end
+  def list_book(chat_id) do
+    IO.inspect(chat_id)
+    new_chat_id = to_string(chat_id)
+    IO.inspect(new_chat_id)
+    query = from(r in Book, where: r.telegram_id == ^new_chat_id, select: r.id)
+    Repo.exists?(query)
+  end
 
+  def get_book_by_name(file_name) do
+    IO.inspect(file_name)
+    query = from(r in Book, where: r.name == ^file_name, select: r.name)
+    Repo.exists?(query)
+  end
+  def get_book_by_id(id) do
+
+  end
   # Get a single
+  @spec get_book!(any()) :: any()
   def get_book!(id) do
     Repo.get!(Book, id)
   end

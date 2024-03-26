@@ -12,6 +12,13 @@ defmodule Library.Users do
     Repo.all(User)
   end
 
+  def user_exists(chat_id) do
+    new_chat_id = to_string(chat_id)
+    query = from(r in User, where: r.telegram_id == ^new_chat_id, select: r.id)
+    Repo.exists?(query)
+
+  end
+
   # Get a single user
   def get_user!(id) do
     Repo.get!(User, id)
@@ -25,23 +32,35 @@ defmodule Library.Users do
   end
 
   # Update a user
+
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
     |> Repo.update()
   end
-
   def get_user_telegram_id_by_name(name) do
-    User
-    |> Repo.get_by(name: name)
-    |> case do
-      nil ->
-        {:error, :not_found}
+    query =
+      from u in Library.Schema.User,
+      where: u.name == ^name,
+      limit: 1  # Limit the query to return only one user
 
-      user ->
-        {:ok, user.telegram_id}
+    case Repo.one(query) do
+      %Library.Schema.User{} = user -> {:ok, user}
+      nil -> {:error, :user_not_found}
     end
   end
+
+  # def get_user_telegram_id_by_name(name) do
+  #   User
+  #   |> Repo.get_by(name: name)
+  #   |> case do
+  #     nil ->
+  #       {:error, :not_found}
+
+  #     user ->
+  #       {:ok, user.telegram_id}
+  #   end
+  # end
 
   def user_exists_by_telegram_id?(telegram_id) when is_integer(telegram_id) do
     query = from(u in User, where: u.telegram_id == ^telegram_id)
@@ -51,7 +70,6 @@ defmodule Library.Users do
   # with telegram id
   def user_exists_by_telegram_id?(telegram_id) do
     IO.inspect("Querying for telegram_id: #{telegram_id} of type #{is_integer(telegram_id)}")
-
     query =
       from(u in User,
         where: u.telegram_id == ^telegram_id,

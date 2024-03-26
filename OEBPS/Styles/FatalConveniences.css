@@ -1,0 +1,1666 @@
+/*NAV*/
+nav#landmarks{
+display:none;
+}
+
+nav#page-list{
+display:none;
+}
+
+ol{
+list-style-type: none;
+}
+
+/* Font faces */
+a{
+text-decoration: none;
+}
+a.aweb{
+text-decoration: underline;
+overflow-wrap: break-word;
+}
+sup, sub{
+font-size:80%;
+line-height:0.70em;
+}
+span.normal{
+font-weight: normal;
+font-style: normal;
+}
+span.bold{
+font-weight: bold;
+font-style: normal;
+}
+span.boldsc{
+font-size: 80%;
+font-weight: bold;
+font-style: normal;
+}
+span.ital{
+font-weight: normal;
+font-style: italic;
+}
+span.italsc{
+font-size: 80%;
+font-style: italic;
+}
+span.boldital{
+font-weight: bold;
+font-style: italic;
+}
+span.bolditalsc{
+font-size: 80%;
+font-weight: bold;
+font-style: italic;
+}
+span.uline{
+text-decoration: underline;
+}
+span.sc{
+font-size: 80%;
+}
+span.blue{
+color: blue;
+}
+.stickupcap{
+font-size: 1.50em;
+font-weight: bold;
+padding:0.00em;
+margin: 0.00em;
+vertical-align:baseline;
+}
+
+span.fraction_numerator{
+font: inherit;
+font-size:.5em;
+vertical-align:40%;
+}
+span.fraction_slash{
+font: inherit;
+font-size:.5em;
+vertical-align:20%;
+}
+span.fraction_denominator{
+font: inherit;
+font-size:.5em;
+vertical-align:0%;
+}
+
+div.cover{
+margin:0.00em;
+text-align:center;
+height:100%;
+}
+div.full{
+width: 100%;
+margin: 1em auto;
+padding-top: 0.50em;
+padding-right: 0.00em;
+padding-bottom: 0.50em;
+padding-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+page-break-inside: avoid;
+}
+div.figbody{
+width: 75%;
+margin: 1em auto;
+padding: 0.5em 0.00em 0.5em 0.00em;
+text-indent: 0.00em;
+text-align: center;
+page-break-inside: avoid;
+}
+
+img{
+margin: 0.00em;
+padding: 0.00em;
+max-width: 100%;
+max-height: 100%;
+}
+
+/* E-Proof Styles */
+p.uncorrected-proof-first{
+font-family: "Times";
+font-weight: normal;
+font-style: normal;
+font-size: x-small;
+text-indent: 0em;
+text-align: center;
+margin: 1.60em 0em 0em 0em;
+color: rgb(126,128,138);
+}
+p.property-of{
+font-family: "Times";
+font-weight: normal;
+font-style: normal;
+font-size: 0.75em;
+text-indent: 0em;
+text-align: center;
+margin: 0.00em;
+color: rgb(126,128,138);
+}
+p.property-of-rule-below{
+font-family: "Times";
+font-weight: normal;
+font-style: normal;
+font-size: 0.75em;
+line-height: 0.11em;
+text-indent: 0em;
+text-align: center;
+margin-top: 0.00em;
+margin-bottom: 3.00em;
+color: rgb(126,128,138);
+}
+
+/*About The Publisher*/
+p.atp_title{
+font-family: "Times";
+line-height: 1.43em;
+font-size: 1.17em;
+margin-top: 2.00em;
+margin-right:0.00em;
+margin-bottom:1.71em;
+margin-left:0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+}
+p.atp_country{
+font-family: "Times";
+line-height: 1.42em;
+margin-top: 1.42em;
+margin-right:0.00em;
+margin-bottom:0.00em;
+margin-left:0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.atp_address{
+font-family: "Times";
+line-height: 1.42em;
+margin-top: 0.00em;
+margin-right:0.00em;
+margin-bottom:0.00em;
+margin-left:0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+}
+
+/* Disclaimer Styles */
+p.disclaimer-h{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 2.00em;
+margin-right:0.00em;
+margin-bottom:0.00em;
+margin-left:0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+}
+p.disclaimer-sh{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right:0.00em;
+margin-bottom:0.50em;
+margin-left:0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+}
+p.disclaimer{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right:0.00em;
+margin-bottom:0.00em;
+margin-left:0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+/* Paragraph Styles */
+p.none{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+color: rgb(0,0,0);
+}
+
+p.FMBMH{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.50em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 2.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+
+p.PN{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.60em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.PT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 2.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.CN{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.50em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.CT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.50em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.ST{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.40em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+
+
+p.H1{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.30em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.50em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+
+p.H2{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.50em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: bold;
+font-style: normal;
+}
+
+p.H3{
+font-family: "Times";
+line-height: 1.3em;
+font-size: 1.30em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: italic;
+}
+p.H3F{
+font-family: "Times";
+line-height: 1.3em;
+font-size: 1.30em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: italic;
+}
+
+p.List-TT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 1.50em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+
+p.List-TT-Left{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 1.50em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: bold;
+font-style: normal;
+}
+
+p.Type{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: bold;
+font-style: normal;
+}
+p.DiyT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+text-decoration: underline;
+}
+p.DiyT2{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+text-decoration: underline;
+}
+p.Step{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 0.50em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.Step2{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 2.00em;
+margin-right: 1.00em;
+margin-bottom: 0.50em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.Src{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: right;
+font-weight: normal;
+font-style: normal;
+}
+p.BD{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: -1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.BR{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 1.50em;
+margin-left: 1.00em;
+text-indent: -1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.PT-TXFF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 4.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+
+
+p.H3-TXFF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.TXFF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+p.TXF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+p.TXF1{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+
+
+p.TXT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+p.TXT1{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.TXT2{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+
+p.INDX-TX{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.INDXF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.INDX{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.INDXSub{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 2.00em;
+text-indent: -1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.EXT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 1.00em;
+margin-right: 1.00em;
+margin-bottom: 1.00em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.EXTF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 1.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.EXTM{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.50em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.EXTL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 1.00em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.EXTTF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 1.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.EXTTM{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.EXTTL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 1.00em;
+margin-left: 1.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+p.EXT-TXT1{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+p.EXT-TXT2{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 1.00em;
+margin-left: 1.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+
+p.ORN{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+color: rgb(0,0,0);
+}
+
+
+
+/*Dedication*/
+p.DEDF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 4.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: italic;
+}
+p.DED{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: italic;
+}
+
+/*Contents (TOC)*/
+p.TF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 3.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: italic;
+}
+
+p.TCNCT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.20em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: bold;
+font-style: normal;
+}
+
+
+p.TCDes{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.30em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: italic;
+}
+p.TFMBMH{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 0.30em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: italic;
+}
+p.TFMBMHF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: italic;
+}
+
+
+/* Copyright */
+p.CRFF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 3.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.CRF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.CR{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+/*Epigraph*/
+p.EPIF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 4.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+}
+p.EPIM{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+}
+p.EPI-AU{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: italic;
+}
+
+
+/*Quote styles*/
+p.QUO-TTL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.20em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.QUOF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: italic;
+}
+p.QUOM{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: italic;
+}
+p.QUOL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: italic;
+}
+
+/*Figure styles*/
+p.FIG{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: normal;
+}
+
+/*Letter styles*/
+p.LTR-TO{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 1.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: italic;
+}
+p.LTR{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: italic;
+}
+p.LTR-TXT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: italic;
+}
+p.LTR-TXTL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 1.00em;
+margin-left: 1.00em;
+text-indent: 1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: italic;
+}
+p.LTR-CLS{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 0.90em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 1.00em;
+margin-left: 25%;
+text-indent: 0.00em;
+text-align: right;
+font-weight: normal;
+font-style: italic;
+}
+
+/*The Rest of the Story styles*/
+p.TR-AU{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 2.50em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: bold;
+font-style: normal;
+}
+p.TR-AU-IMG{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: bold;
+font-style: normal;
+}
+/*Author's Note styles*/
+p.AUTH-SIG{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.50em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+p.AUTH-DT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: justify;
+font-weight: normal;
+font-style: italic;
+}
+/*Appendix styles*/
+p.APP{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 2.00em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.APP-TTL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.50em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 3.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+/*Bibliography styles*/
+p.BIB-H1{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.20em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.50em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.BIB{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: -1.00em;
+text-align: justify;
+font-weight: normal;
+font-style: normal;
+}
+/*Notes styles*/
+p.NTH{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.50em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: bold;
+font-style: normal;
+}
+
+p.NT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 2.00em;
+text-indent: -2.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.NT-TXF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 2.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.NT-TXT{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 2.00em;
+text-indent: 1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+/*Also By styles*/
+p.ALSH{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.30em;
+margin-top: 3.00em;
+margin-right: 0.00em;
+margin-bottom: 2.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+
+p.ALS{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.50em;
+margin-right: 0.00em;
+margin-bottom: 0.50em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: normal;
+font-style: italic;
+}
+
+/*Footnote*/
+p.FNN{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 4.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.FN{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.ULF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 2.00em;
+text-indent: -1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.ULM{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 2.00em;
+text-indent: -1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.ULL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 1.00em;
+margin-bottom: 1.00em;
+margin-left: 2.00em;
+text-indent: -1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+p.BLF{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 1.00em;
+margin-right: 1.00em;
+margin-bottom: 0.00em;
+margin-left: 2.10em;
+text-indent: -1.10em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.BLM{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 2.10em;
+text-indent: -1.10em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+p.BLL{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 1.00em;
+margin-left: 2.10em;
+text-indent: -1.10em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+}
+
+
+
+
+
+p.SrcsH{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+p.SrcsH2{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: normal;
+}
+
+p.ARH{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.10em;
+margin-top: 2.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 0.00em;
+text-indent: 0.00em;
+text-align: center;
+font-weight: bold;
+font-style: italic;
+}
+
+/* List */
+ol.numbered{
+list-style-type: decimal;
+    list-style-position:outside;
+    margin-top:1.00em;
+    margin-right:0.00em;
+    margin-bottom:1.00em;
+    margin-left:0.00em;
+    padding-left:0.90em;
+}
+ol.numbered li{
+    font-family:"Times";
+    line-height:1.33em;
+    font-size:1.00em;
+    margin-top:0.00em;
+    margin-right:0.00em;
+    margin-bottom:0.00em;
+    margin-left:0.10em;
+    text-indent:0.00em;
+    text-align:left;
+    font-weight:normal;
+    font-style:normal;
+    padding-left:0.00em;
+}
+
+ul.ultxt{
+list-style-type: none;
+list-style-position: outside;
+margin-top: 1.00em;
+margin-right: 0.00em;
+margin-bottom: 1.50em;
+margin-left: 0.00em;
+padding-left: 0.90em;
+}
+ul.ultxt li{
+font-family: "Times";
+line-height: 1.33em;
+font-size: 1.00em;
+margin-top: 0.00em;
+margin-right: 0.00em;
+margin-bottom: 0.00em;
+margin-left: 1.00em;
+text-indent: -1.00em;
+text-align: left;
+font-weight: normal;
+font-style: normal;
+padding-left: 0.00em;
+}
+
+ul.bullet{
+    list-style-type:disc;
+    list-style-position:outside;
+    margin-top:1.00em;
+    margin-right:0.00em;
+    margin-bottom:1.00em;
+    margin-left:0.00em;
+    padding-left:0.90em;
+}
+
+ul.bullet li{
+    font-family:"Times";
+    line-height:1.33em;
+    font-size:1.00em;
+    margin-top:0.00em;
+    margin-right:0.00em;
+    margin-bottom:0.00em;
+    margin-left:0.10em;
+    text-indent:0.00em;
+    text-align:left;
+    font-weight:normal;
+    font-style:normal;
+    padding-left:0.00em;
+}
+ul.bullet-top{
+    list-style-type:disc;
+    list-style-position:outside;
+    margin-top:0.00em;
+    margin-right:0.00em;
+    margin-bottom:1.00em;
+    margin-left:0.00em;
+    padding-left:0.90em;
+}
+
+ul.bullet-top li{
+    font-family:"Times";
+    line-height:1.33em;
+    font-size:1.00em;
+    margin-top:0.00em;
+    margin-right:0.00em;
+    margin-bottom:0.00em;
+    margin-left:0.10em;
+    text-indent:0.00em;
+    text-align:left;
+    font-weight:normal;
+    font-style:normal;
+    padding-left:0.00em;
+}
+
+ul.bullet-in{
+    list-style: disc;
+    list-style-position:outside;
+    margin-top:1.00em;
+    margin-right:0.00em;
+    margin-bottom:1.00em;
+    margin-left:1.00em;
+    padding-left:0.90em;
+}
+
+ul.bullet-in li{
+    font-family:"Times";
+    line-height:1.33em;
+    font-size:1.00em;
+    margin-top:0.00em;
+    margin-right:0.00em;
+    margin-bottom:0.00em;
+    margin-left:0.10em;
+    text-indent:0.00em;
+    text-align:left;
+    font-weight:normal;
+    font-style:normal;
+    padding-left:0.00em;
+}
+
+ul.bullet-2{
+    list-style-type:circle;
+    list-style-position:outside;
+    margin-top:0.00em;
+    margin-right:0.00em;
+    margin-bottom:0.00em;
+    margin-left:0.00em;
+    padding-left:0.90em;
+}
+
+ul.bullet-2 li{
+    font-family:"Times";
+    line-height:1.33em;
+    font-size:1.00em;
+    margin-top:0.00em;
+    margin-right:0.00em;
+    margin-bottom:0.00em;
+    margin-left:0.10em;
+    text-indent:0.00em;
+    text-align:left;
+    font-weight:normal;
+    font-style:normal;
+    padding-left:0.00em;
+}
+
+/*
+ul.astrsk{
+    list-style: "*";
+    list-style-position:outside;
+    margin-top:1.00em;
+    margin-right:0.00em;
+    margin-bottom:1.00em;
+    margin-left:0.00em;
+    padding-left:0.90em;
+}
+ul.astrsk li{
+    font-family:"Times";
+    line-height:1.33em;
+    font-size:1.00em;
+    margin-top:0.50em;
+    margin-right:0.00em;
+    margin-bottom:0.00em;
+    margin-left:0.80em;
+    text-indent:0.00em;
+    text-align:left;
+    font-weight:bold;
+    font-style:normal;
+    padding-left:0.50em;
+}
+*/

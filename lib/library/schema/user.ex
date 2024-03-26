@@ -4,7 +4,7 @@ defmodule Library.Schema.User do
 
   schema "users" do
     field :name, :string
-    field :telegram_id, :decimal
+    field :telegram_id, :string
     field :first_name, :string
     field :last_name, :string
     field :timestamp, :naive_datetime
@@ -17,5 +17,9 @@ defmodule Library.Schema.User do
     user
     |> cast(attrs, [:name, :telegram_id, :first_name, :last_name, :timestamp])
     |> validate_required([:name, :telegram_id, :timestamp])
+    |> put_change(:name, get_change(user, :name, "default_name"))
+    |> put_change(:telegram_id, get_change(user, :telegram_id, "default_telegram_id"))
+    |> put_change(:timestamp, get_change(user, :timestamp, NaiveDateTime.utc_now()))
   end
+
 end

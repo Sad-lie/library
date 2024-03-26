@@ -1,0 +1,86 @@
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uid" version="3.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title>Natural Remedies for Low Testosterone</dc:title>
+    <dc:creator>Stephen Harrod Buhner</dc:creator>
+    <dc:publisher>Inner Traditions / Bear &amp; Company</dc:publisher>
+    <dc:date>2015-12-20</dc:date>
+    <dc:format>ePub</dc:format>
+    <dc:identifier id="uid">9781620555057</dc:identifier>
+    <dc:language>en</dc:language>
+    <dc:rights>&lt;p&gt;Stephen Harrod Buhner&lt;/p&gt;</dc:rights>
+    <dc:subject>Men’s Health</dc:subject>
+    <meta property="dcterms:modified">2002-01-01T05:58:35Z</meta>
+    <meta content="cviimg" name="cover"/>
+  <description xmlns="http://purl.org/dc/elements/1.1/">&lt;p&gt;Testosterone-blocking estrogen agents are present in insecticides, industrial materials, pharmaceuticals, and foods. Men are daily inundated with a “cocktail” of estrogen agents that alter the fine balance of testosterone that makes them male. In this updated edition of _The Natural Testosterone Plan_, Stephen Harrod Buhner shows how men can maintain their testosterone levels as they age and explains how naturally occurring phytoandrogens--plant medicines that contain male hormones--can safely remedy the depletion exerted by the environment.</description>
+</metadata>
+  <manifest>
+    <item href="9781620555057.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="9781620555057.css" id="style" media-type="text/css"/>
+    <item href="9781620555057_cvi.htm" id="cvi" media-type="application/xhtml+xml" properties="svg"/>
+    <item href="9781620555057_tp.htm" id="tp" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_epi.htm" id="epi" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_toc.htm" id="toc" media-type="application/xhtml+xml" properties="nav"/>
+    <item href="9781620555057_prf.htm" id="prf" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_fm.htm" id="fm" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c01.htm" id="c01" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c02.htm" id="c02" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c03.htm" id="c03" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c04.htm" id="c04" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c05.htm" id="c05" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c06.htm" id="c06" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c07.htm" id="c07" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_c08.htm" id="c08" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_app.htm" id="app" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_bm1.htm" id="bm1" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_nts.htm" id="nts" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_bm2.htm" id="bm2" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_bm3.htm" id="bm3" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_ata.htm" id="ata" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_atp.htm" id="atp" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_adc.htm" id="adc" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_cop.htm" id="cop" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_bm4.htm" id="bm4" media-type="application/xhtml+xml"/>
+    <item href="9781620555057_adv.htm" id="adv" media-type="application/xhtml+xml"/>
+    <item href="images/9781620555057_cvi.jpg" id="cviimg" media-type="image/jpeg"/>
+    <item href="images/epubnow_logo.jpg" id="img01" media-type="image/jpeg"/>
+    <item href="images/img_1.jpg" id="img02" media-type="image/jpeg"/>
+    <item href="images/img_2.jpg" id="img03" media-type="image/jpeg"/>
+    <item href="images/img_3.jpg" id="img04" media-type="image/jpeg"/>
+    <item href="images/img_4.jpg" id="img05" media-type="image/jpeg"/>
+    <item href="images/img_sc.jpg" id="img06" media-type="image/jpeg"/>
+    <item href="images/img_tp.jpg" id="img07" media-type="image/jpeg"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="cvi"/>
+    <itemref idref="tp"/>
+    <itemref idref="epi"/>
+    <itemref idref="toc"/>
+    <itemref idref="prf"/>
+    <itemref idref="fm"/>
+    <itemref idref="c01"/>
+    <itemref idref="c02"/>
+    <itemref idref="c03"/>
+    <itemref idref="c04"/>
+    <itemref idref="c05"/>
+    <itemref idref="c06"/>
+    <itemref idref="c07"/>
+    <itemref idref="c08"/>
+    <itemref idref="app"/>
+    <itemref idref="bm1"/>
+    <itemref idref="nts"/>
+    <itemref idref="bm2"/>
+    <itemref idref="bm3"/>
+    <itemref idref="ata"/>
+    <itemref idref="atp"/>
+    <itemref idref="adc"/>
+    <itemref idref="cop"/>
+    <itemref idref="bm4"/>
+    <itemref idref="adv"/>
+  </spine>
+  <guide>
+    <reference href="9781620555057_tp.htm" title="Title Page" type="title-page"/>
+    <reference href="9781620555057_toc.htm" title="Table of Contents" type="toc"/>
+    <reference href="9781620555057_ata.htm" title="About the Author" type="other.ata"/>
+    <reference href="9781620555057_cop.htm" title="Copyright and Permissions" type="copyright-page"/>
+  </guide>
+</package>
