@@ -1,0 +1,110 @@
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="p9781941631874" version="2.0">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+<dc:title>When Your Partner Has an Addiction</dc:title>
+<dc:creator opf:file-as="Lawford, Christopher Kennedy and Engel, Beverly" opf:role="aut">Christopher Kennedy Lawford</dc:creator>
+<dc:source>URN:ISBN:978-1-9416-3187-4</dc:source>
+<dc:identifier id="p9781941631874">URN:ISBN:978-1-9416-3187-4</dc:identifier>
+<dc:publisher>BenBella Books, Inc.</dc:publisher>
+<dc:type>Text</dc:type>
+<dc:format>232 Pages</dc:format>
+<dc:rights>All rights reserved</dc:rights>
+<dc:language>en</dc:language>
+<meta content="cover-image" name="cover"/>
+<description xmlns="http://purl.org/dc/elements/1.1/">&lt;p&gt;&lt;B&gt;Your partner's addiction takes a toll on both of your lives.&lt;BR&gt;That doesn't mean you should turn your back on the person you love. &lt;/B&gt;&lt;BR&gt;We've been told that staying with a partner who struggles with addiction&amp;#8212;whether it be with drugs, alcohol, or addictive behaviors&amp;#8212;means that we're enabling their destructive behavior. That wanting to help them means we're codependent, and that the best thing for both of us is to walk away from the relationship entirely. But is that true?&lt;BR&gt;&lt;I&gt;How to Love an Addict&lt;/I&gt; challenges the idea that the best chance for recovery&amp;#8212;for the addict and their partner&amp;#8212;is to walk away. Instead, it makes the revolutionary claim that you, and the love you have for your partner, can be a key part of his or her journey to recovery.&lt;BR&gt;Together, addiction activist and bestselling author Christopher Kennedy Lawford and psychotherapist Beverly Engel, MFT, take a fresh look at addiction and codependency&amp;#8212;the latest research on...</description>
+</metadata>
+<manifest>
+<item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+<item href="stylesheet.css" id="stylesheet" media-type="text/css"/>
+<item href="Cover.html" id="Cover" media-type="application/xhtml+xml"/>
+<item href="Praise.html" id="Praise" media-type="application/xhtml+xml"/>
+<item href="Front01.html" id="Front01" media-type="application/xhtml+xml"/>
+<item href="Halftitle.html" id="Halftitle" media-type="application/xhtml+xml"/>
+<item href="Title.html" id="Title" media-type="application/xhtml+xml"/>
+<item href="Copyright.html" id="Copyright" media-type="application/xhtml+xml"/>
+<item href="Contents.html" id="Contents" media-type="application/xhtml+xml"/>
+<item href="Introduction.html" id="Introduction" media-type="application/xhtml+xml"/>
+<item href="Part01.html" id="Part01" media-type="application/xhtml+xml"/>
+<item href="Chapter01.html" id="Chapter01" media-type="application/xhtml+xml"/>
+<item href="Chapter02.html" id="Chapter02" media-type="application/xhtml+xml"/>
+<item href="Chapter03.html" id="Chapter03" media-type="application/xhtml+xml"/>
+<item href="Part02.html" id="Part02" media-type="application/xhtml+xml"/>
+<item href="Chapter04.html" id="Chapter04" media-type="application/xhtml+xml"/>
+<item href="Chapter05.html" id="Chapter05" media-type="application/xhtml+xml"/>
+<item href="Part03.html" id="Part03" media-type="application/xhtml+xml"/>
+<item href="Chapter06.html" id="Chapter06" media-type="application/xhtml+xml"/>
+<item href="Chapter07.html" id="Chapter07" media-type="application/xhtml+xml"/>
+<item href="Chapter08.html" id="Chapter08" media-type="application/xhtml+xml"/>
+<item href="Chapter09.html" id="Chapter09" media-type="application/xhtml+xml"/>
+<item href="Chapter10.html" id="Chapter10" media-type="application/xhtml+xml"/>
+<item href="Conclusion.html" id="Conclusion" media-type="application/xhtml+xml"/>
+<item href="Appendix1.html" id="Appendix1" media-type="application/xhtml+xml"/>
+<item href="Appendix2.html" id="Appendix2" media-type="application/xhtml+xml"/>
+<item href="Endnote.html" id="Endnote" media-type="application/xhtml+xml"/>
+<item href="Author.html" id="Author" media-type="application/xhtml+xml"/>
+<item href="Back01.html" id="Back01" media-type="application/xhtml+xml"/>
+<item href="Back02.html" id="Back02" media-type="application/xhtml+xml"/>
+<item href="images/cover.jpg" id="cover-image" media-type="image/jpeg"/>
+<item href="images/title.jpg" id="title" media-type="image/jpeg"/>
+<item href="images/copy.jpg" id="copy" media-type="image/jpeg"/>
+<item href="images/linef.jpg" id="linef" media-type="image/jpeg"/>
+<item href="images/linec.jpg" id="linec" media-type="image/jpeg"/>
+<item href="images/line.jpg" id="line" media-type="image/jpeg"/>
+<item href="images/f0221-01.jpg" id="f0221-01" media-type="image/jpeg"/>
+<item href="images/f0222-01.jpg" id="f0222-01" media-type="image/jpeg"/>
+</manifest>
+<spine toc="ncx">
+<itemref idref="Cover"/>
+<itemref idref="Praise"/>
+<itemref idref="Front01"/>
+<itemref idref="Halftitle"/>
+<itemref idref="Title"/>
+<itemref idref="Copyright"/>
+<itemref idref="Contents"/>
+<itemref idref="Introduction"/>
+<itemref idref="Part01"/>
+<itemref idref="Chapter01"/>
+<itemref idref="Chapter02"/>
+<itemref idref="Chapter03"/>
+<itemref idref="Part02"/>
+<itemref idref="Chapter04"/>
+<itemref idref="Chapter05"/>
+<itemref idref="Part03"/>
+<itemref idref="Chapter06"/>
+<itemref idref="Chapter07"/>
+<itemref idref="Chapter08"/>
+<itemref idref="Chapter09"/>
+<itemref idref="Chapter10"/>
+<itemref idref="Conclusion"/>
+<itemref idref="Appendix1"/>
+<itemref idref="Appendix2"/>
+<itemref idref="Endnote"/>
+<itemref idref="Author"/>
+<itemref idref="Back01"/>
+<itemref idref="Back02"/>
+</spine>
+<guide>
+<reference href="Cover.html" title="Cover" type="start"/>
+<reference href="Title.html" title="Title Page" type="text"/>
+<reference href="Copyright.html" title="Copyright" type="a003"/>
+<reference href="Contents.html" title="contents" type="toc"/>
+<reference href="Introduction.html#int" title="Introduction" type="a005"/>
+<reference href="Part01.html#pt1" title="PART I. Love, Compassion, and Understanding" type="a006"/>
+<reference href="Chapter01.html#ch1" title="Chapter 1 Love and Addiction: Can They Coexist?" type="a007"/>
+<reference href="Chapter02.html#ch2" title="Chapter 2 Do I Love My Partner Enough to Stay?" type="a008"/>
+<reference href="Chapter03.html#ch3" title="Chapter 3 Hope and Compassion: The Keys to Healing" type="a009"/>
+<reference href="Part02.html#pt2" title="PART II. Taking on a Compassionate Attitude" type="a010"/>
+<reference href="Chapter04.html#ch4" title="Chapter 4 A Fresh Look at Addiction" type="a011"/>
+<reference href="Chapter05.html#ch5" title="Chapter 5 A Different Perspective on Codependency" type="a012"/>
+<reference href="Part03.html#pt3" title="PART III. Your Role in Your Partner’s Recovery" type="a013"/>
+<reference href="Chapter06.html#ch6" title="Chapter 6 The Difference between Codependency and Compassion" type="a014"/>
+<reference href="Chapter07.html#ch7" title="Chapter 7 Should You Be a Supporter or a Collaborator?" type="a015"/>
+<reference href="Chapter08.html#ch8" title="Chapter 8 Becoming a Compassionate Supporter" type="a016"/>
+<reference href="Chapter09.html#ch9" title="Chapter 9 Becoming a Compassionate Collaborator" type="a017"/>
+<reference href="Chapter10.html#ch10" title="Chapter 10 Creating Your Own Self-Care Program" type="a018"/>
+<reference href="Conclusion.html#con" title="Conclusion" type="a019"/>
+<reference href="Appendix1.html#app1" title="Appendix I: Types of Childhood Abuse" type="a020"/>
+<reference href="Appendix2.html#app2" title="Appendix II: Options for Recovery" type="a021"/>
+<reference href="Endnote.html#end" title="Endnotes" type="a022"/>
+<reference href="Author.html#aut" title="About the Authors" type="a023"/>
+</guide>
+</package>

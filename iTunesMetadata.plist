@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>artistName</key>
+	<string>Christopher Kennedy Lawford and Beverly Engel</string>
+	<key>book-info</key>
+	<dict>
+		<key>cover-image-hash</key>
+		<string>28B114B28FD17059274AB3E488939A5E</string>
+		<key>cover-image-path</key>
+		<string>OEBPS/images/cover.jpg</string>
+		<key>mime-type</key>
+		<string>application/epub+zip</string>
+		<key>package-file-hash</key>
+		<string>3E023946CD388E756C59182287E2B9B5</string>
+		<key>publisher-unique-id</key>
+		<string>URN:ISBN:978-1-9416-3187-4</string>
+		<key>unique-id</key>
+		<integer>5673741561415039746</integer>
+		<key>update-level</key>
+		<integer>2</integer>
+	</dict>
+	<key>itemName</key>
+	<string>When Your Partner Has an Addiction</string>
+	<key>playlistName</key>
+	<string>When Your Partner Has an Addiction</string>
+	<key>sort-artist</key>
+	<string>Lawford, Christopher Kennedy and Engel, Beverly</string>
+	<key>sort-artist-status</key>
+	<integer>3</integer>
+</dict>
+</plist>

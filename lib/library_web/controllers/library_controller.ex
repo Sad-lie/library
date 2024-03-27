@@ -5,10 +5,10 @@ defmodule LibraryWeb.LibraryController do
 
 
     def start do
-      unzip_epub("/home/liar/elixir/projects/library/lib/library/files/the-idiot.epub")
+      unzip_epub("/home/liar/elixir/projects/library/lib/library/files/the-idiot.epub",1,"977_236_716")
     end
 
-    def unzip_epub(file_path) when is_binary(file_path) do
+    def unzip_epub(file_path, book_id, user_id) when is_binary(file_path) do
       case File.read(file_path) do
         {:ok, content} ->
           case :zip.extract(content) do
@@ -19,7 +19,7 @@ defmodule LibraryWeb.LibraryController do
               |> Enum.map(&to_string/1)
               |> ext_xhtml()
               |> IO.inspect()
-              |> Enum.map(&on_files/1)
+              |> Enum.map(&on_files(&1, book_id, user_id))
 
             {:error, reason} ->
               {:error, "Failed to unzip EPUB: #{reason}"}
@@ -33,8 +33,11 @@ defmodule LibraryWeb.LibraryController do
   def unzip_epub(non_binary) do
     IO.inspect(non_binary, label: "Received unexpected data type")
     {:error, "Expected a file path string"}
+    IO.inspect(non_binary)
   end
-
+  # def unzip(anything) do
+  # IO.inspect(anything, label: "Received unexpectedtype")
+  # end
   def maper(text) do
     text
     |> String.split("\n\n")
@@ -89,7 +92,7 @@ defmodule LibraryWeb.LibraryController do
     end
   end
 
-  def on_files(file_paths) when is_list(file_paths) do
+  def on_files(file_paths, book_id, user_id) when is_list(file_paths) do
     Enum.map(file_paths, fn file_path ->
       # Extract chapter name from file_path, assuming the chapter name is the file's base name without the extension
       chapter_name = file_path |> Path.basename() |> Path.rootname()
@@ -106,26 +109,32 @@ defmodule LibraryWeb.LibraryController do
           title = chapter_name
           changeset =
             %Library.Schema.Content{}
-            |> Ecto.Changeset.change(%{data: processed_content, chapter: title})
+            |> Ecto.Changeset.change(%{data: processed_content, chapter: title, book_id: book_id,telegram_id: user_id})
 
           case Library.Repo.insert(changeset) do
-            {:ok, _record} -> IO.puts("#{title} inserted successfully.")
-            {:error, changeset} -> IO.inspect(changeset.errors)
+            {:ok, _record} ->
+              # Success case
+              IO.puts("#{title} inserted successfully.")
+            {:error, changeset} ->
+              # Handle the changeset error case
+              Enum.each(changeset.errors, fn {field, {error, validation_info}} ->
+                IO.puts("Error on field #{field}: #{error}")
+                IO.inspect(validation_info)
+              end)
           end
-
         {:error, reason} ->
           IO.puts("Failed to read #{file_path}: #{reason}")
       end
     end)
   end
 
-  def on_files(file_path) when is_binary(file_path) do
-    on_files([file_path])
+  def on_files(file_path, book_id, user_id) when is_binary(file_path) do
+    on_files([file_path], book_id, user_id)
   end
 
-  def on_files(file_path) when is_binary(file_path) do
-    on_files([file_path])
-  end
+  # def on_files(file_path, book_id, user_id) when is_binary(file_path) do
+  #   on_files([file_path])
+  # end
 
 
   def insert(_unexpected_data) do

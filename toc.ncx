@@ -1,87 +1,51 @@
 <?xml version='1.0' encoding='utf-8'?>
 <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
   <head>
-    <meta content="eb2934ae-bb1a-4652-bce7-9f78fc5ca496" name="dtb:uid"/>
+    <meta content="e000b55d-98b5-4b94-b8e9-8993865b8caa" name="dtb:uid"/>
     <meta content="2" name="dtb:depth"/>
-    <meta content="calibre (3.21.0)" name="dtb:generator"/>
+    <meta content="calibre (2.19.0)" name="dtb:generator"/>
     <meta content="0" name="dtb:totalPageCount"/>
     <meta content="0" name="dtb:maxPageNumber"/>
   </head>
   <docTitle>
-    <text>Alice's Adventures in Wonderland</text>
+    <text>Getting the Mercury Out</text>
   </docTitle>
   <navMap>
-    <navPoint class="chapter" id="navPoint-1" playOrder="1">
+    <navPoint class="chapter" id="num_1" playOrder="1">
       <navLabel>
-        <text>I. Down the Rabbit-Hole</text>
+        <text>Part I  Silver or White?</text>
       </navLabel>
-      <content src="chapter01.xhtml"/>
+      <content src="index_split_003.html"/>
     </navPoint>
-    <navPoint class="chapter" id="navpoint-2" playOrder="2">
+    <navPoint class="chapter" id="num_2" playOrder="2">
       <navLabel>
-        <text>II. The Pool of Tears</text>
+        <text>Part II  The Dump Phase</text>
       </navLabel>
-      <content src="chapter02.xhtml"/>
+      <content src="index_split_004.html"/>
     </navPoint>
-    <navPoint class="chapter" id="navpoint-3" playOrder="3">
+    <navPoint class="chapter" id="num_3" playOrder="3">
       <navLabel>
-        <text>III. A Caucus-Race and a Long Tale</text>
+        <text>Part III  DMSA</text>
       </navLabel>
-      <content src="chapter03.xhtml"/>
+      <content src="index_split_005.html"/>
     </navPoint>
-    <navPoint class="chapter" id="navpoint-4" playOrder="4">
+    <navPoint class="chapter" id="num_4" playOrder="4">
       <navLabel>
-        <text>IV. The Rabbit Sends in a Little Bill</text>
+        <text>Part IV  Flashes of Fantastic</text>
       </navLabel>
-      <content src="chapter04.xhtml"/>
+      <content src="index_split_006.html"/>
     </navPoint>
-    <navPoint class="chapter" id="navpoint-5" playOrder="5">
+    <navPoint class="chapter" id="num_5" playOrder="5">
       <navLabel>
-        <text>V. Advice from a Caterpillar</text>
+        <text>Part V  Rebuilding</text>
       </navLabel>
-      <content src="chapter05.xhtml"/>
+      <content src="index_split_007.html"/>
     </navPoint>
-    <navPoint class="chapter" id="navpoint-6" playOrder="6">
+    <navPoint class="chapter" id="num_6" playOrder="6">
       <navLabel>
-        <text>VI. Pig and Pepper</text>
+        <text>Epilogue</text>
       </navLabel>
-      <content src="chapter06.xhtml"/>
-    </navPoint>
-    <navPoint class="chapter" id="navpoint-7" playOrder="7">
-      <navLabel>
-        <text>VII. A Mad Tea-Party</text>
-      </navLabel>
-      <content src="chapter07.xhtml"/>
-    </navPoint>
-    <navPoint class="chapter" id="navpoint-8" playOrder="8">
-      <navLabel>
-        <text>VIII. The Queen's Croquet-Ground</text>
-      </navLabel>
-      <content src="chapter08.xhtml"/>
-    </navPoint>
-    <navPoint class="chapter" id="navpoint-9" playOrder="9">
-      <navLabel>
-        <text>IX. The Mock Turtle's Story</text>
-      </navLabel>
-      <content src="chapter09.xhtml"/>
-    </navPoint>
-    <navPoint class="chapter" id="navpoint-10" playOrder="10">
-      <navLabel>
-        <text>X. The Lobster Quadrille</text>
-      </navLabel>
-      <content src="chapter10.xhtml"/>
-    </navPoint>
-    <navPoint class="chapter" id="navpoint-11" playOrder="11">
-      <navLabel>
-        <text>XI. Who Stole the Tarts?</text>
-      </navLabel>
-      <content src="chapter11.xhtml"/>
-    </navPoint>
-    <navPoint class="chapter" id="navpoint-12" playOrder="12">
-      <navLabel>
-        <text>XII. Alice's Evidence</text>
-      </navLabel>
-      <content src="chapter12.xhtml"/>
+      <content src="index_split_008.html"/>
     </navPoint>
   </navMap>
 </ncx>

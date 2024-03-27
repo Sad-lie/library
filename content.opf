@@ -1,82 +1,52 @@
 <?xml version='1.0' encoding='utf-8'?>
 <package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
-  <metadata xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <dc:publisher>D. Appleton and Co</dc:publisher>
-    <dc:rights>Public Domain</dc:rights>
+  <metadata xmlns:dcterms="http://purl.org/dc/terms/" xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <dc:creator opf:file-as="Cheallaigh, Aine Ni" opf:role="aut">Aine Ni Cheallaigh</dc:creator>
+    <dc:date>2011-04-23T07:00:00+00:00</dc:date>
+    <meta name="calibre:timestamp" content="2015-02-21T08:05:44.250000+00:00"/>
     <dc:language>en</dc:language>
-    <dc:creator opf:file-as="Unknown" opf:role="aut">Lewis Carroll</dc:creator>
-    <meta name="calibre:timestamp" content="2019-12-07T02:24:45.728512+00:00"/>
-    <dc:title>Alice's Adventures in Wonderland</dc:title>
+    <dc:title>Getting the Mercury Out</dc:title>
+    <meta name="calibre:title_sort" content="Getting the Mercury Out"/>
+    <dc:identifier opf:scheme="MOBI-ASIN">B004XTWZXY</dc:identifier>
+    <dc:identifier id="uuid_id" opf:scheme="uuid">e000b55d-98b5-4b94-b8e9-8993865b8caa</dc:identifier>
+    <dc:identifier opf:scheme="calibre">e000b55d-98b5-4b94-b8e9-8993865b8caa</dc:identifier>
+    <dc:contributor opf:role="bkp">calibre (2.19.0) [http://calibre-ebook.com]</dc:contributor>
     <meta name="cover" content="cover"/>
-    <dc:date>1865-07-04T00:00:00+00:00</dc:date>
-    <dc:contributor opf:role="bkp">calibre (3.21.0) [http://calibre-ebook.com]</dc:contributor>
-    <dc:identifier id="uuid_id" opf:scheme="uuid">eb2934ae-bb1a-4652-bce7-9f78fc5ca496</dc:identifier>
-    <dc:subject>fiction</dc:subject>
+    <dc:publisher>Capsule Press</dc:publisher>
   </metadata>
   <manifest>
-    <item href="cover_image.jpg" id="cover" media-type="image/jpeg"/>
-    <item href="chapter01.xhtml" id="chapter01" media-type="application/xhtml+xml"/>
-    <item href="chapter02.xhtml" id="chapter02" media-type="application/xhtml+xml"/>
-    <item href="chapter03.xhtml" id="chapter03" media-type="application/xhtml+xml"/>
-    <item href="chapter04.xhtml" id="chapter04" media-type="application/xhtml+xml"/>
-    <item href="chapter05.xhtml" id="chapter05" media-type="application/xhtml+xml"/>
-    <item href="chapter06.xhtml" id="chapter06" media-type="application/xhtml+xml"/>
-    <item href="chapter07.xhtml" id="chapter07" media-type="application/xhtml+xml"/>
-    <item href="chapter08.xhtml" id="chapter08" media-type="application/xhtml+xml"/>
-    <item href="chapter09.xhtml" id="chapter09" media-type="application/xhtml+xml"/>
-    <item href="chapter10.xhtml" id="chapter10" media-type="application/xhtml+xml"/>
-    <item href="chapter11.xhtml" id="chapter11" media-type="application/xhtml+xml"/>
-    <item href="chapter12.xhtml" id="chapter12" media-type="application/xhtml+xml"/>
-    <item href="fonts/MinionPro-It.otf" id="added1" media-type="application/vnd.ms-opentype"/>
-    <item href="fonts/MinionPro.otf" id="added" media-type="application/vnd.ms-opentype"/>
-    <item href="images/alice01a.gif" id="img01a" media-type="image/gif"/>
-    <item href="images/alice02a.gif" id="img02a" media-type="image/gif"/>
-    <item href="images/alice03a.gif" id="img03a" media-type="image/gif"/>
-    <item href="images/alice04a.gif" id="img04a" media-type="image/gif"/>
-    <item href="images/alice05a.gif" id="img05a" media-type="image/gif"/>
-    <item href="images/alice06a.gif" id="img06a" media-type="image/gif"/>
-    <item href="images/alice07a.gif" id="img07a" media-type="image/gif"/>
-    <item href="images/alice08a.gif" id="img08a" media-type="image/gif"/>
-    <item href="images/alice09a.gif" id="img09a" media-type="image/gif"/>
-    <item href="images/alice10a.gif" id="img10a" media-type="image/gif"/>
-    <item href="images/alice11a.gif" id="img11a" media-type="image/gif"/>
-    <item href="images/alice12a.gif" id="img12a" media-type="image/gif"/>
-    <item href="images/alice13a.gif" id="img13a" media-type="image/gif"/>
-    <item href="images/alice14a.gif" id="img14a" media-type="image/gif"/>
-    <item href="images/alice15a.gif" id="img15a" media-type="image/gif"/>
-    <item href="images/alice16a.gif" id="img16a" media-type="image/gif"/>
-    <item href="images/alice17a.gif" id="img17a" media-type="image/gif"/>
-    <item href="images/alice18a.gif" id="img18a" media-type="image/gif"/>
-    <item href="images/alice19a.gif" id="img19a" media-type="image/gif"/>
-    <item href="images/alice20a.gif" id="img20a" media-type="image/gif"/>
-    <item href="images/alice21a.gif" id="img21a" media-type="image/gif"/>
-    <item href="images/alice22a.gif" id="img22a" media-type="image/gif"/>
-    <item href="images/alice23a.gif" id="img23a" media-type="image/gif"/>
-    <item href="images/alice24a.gif" id="img24a" media-type="image/gif"/>
-    <item href="page-template.xpgt" id="pt" media-type="application/vnd.adobe-page-template+xml"/>
+    <item href="cover.jpeg" id="cover" media-type="image/jpeg"/>
+    <item href="index_split_000.html" id="id110" media-type="application/xhtml+xml"/>
+    <item href="index_split_001.html" id="id19" media-type="application/xhtml+xml"/>
+    <item href="index_split_002.html" id="id18" media-type="application/xhtml+xml"/>
+    <item href="index_split_003.html" id="id17" media-type="application/xhtml+xml"/>
+    <item href="index_split_004.html" id="id16" media-type="application/xhtml+xml"/>
+    <item href="index_split_005.html" id="id15" media-type="application/xhtml+xml"/>
+    <item href="index_split_006.html" id="id14" media-type="application/xhtml+xml"/>
+    <item href="index_split_007.html" id="id13" media-type="application/xhtml+xml"/>
+    <item href="index_split_008.html" id="id12" media-type="application/xhtml+xml"/>
+    <item href="index_split_009.html" id="id11" media-type="application/xhtml+xml"/>
     <item href="page_styles.css" id="page_css" media-type="text/css"/>
     <item href="stylesheet.css" id="css" media-type="text/css"/>
     <item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml"/>
-    <item href="titlepage1.xhtml" id="titlepage1" media-type="application/xhtml+xml"/>
     <item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
   </manifest>
   <spine toc="ncx">
-    <itemref idref="titlepage1"/>
     <itemref idref="titlepage"/>
-    <itemref idref="chapter01"/>
-    <itemref idref="chapter02"/>
-    <itemref idref="chapter03"/>
-    <itemref idref="chapter04"/>
-    <itemref idref="chapter05"/>
-    <itemref idref="chapter06"/>
-    <itemref idref="chapter07"/>
-    <itemref idref="chapter08"/>
-    <itemref idref="chapter09"/>
-    <itemref idref="chapter10"/>
-    <itemref idref="chapter11"/>
-    <itemref idref="chapter12"/>
+    <itemref idref="id110"/>
+    <itemref idref="id19"/>
+    <itemref idref="id18"/>
+    <itemref idref="id17"/>
+    <itemref idref="id16"/>
+    <itemref idref="id15"/>
+    <itemref idref="id14"/>
+    <itemref idref="id13"/>
+    <itemref idref="id12"/>
+    <itemref idref="id11"/>
   </spine>
   <guide>
-    <reference href="titlepage1.xhtml" title="Title Page" type="cover"/>
+    <reference href="titlepage.xhtml" title="Cover" type="cover"/>
+    <reference href="index_split_002.html#filepos3441" title="Table of Contents" type="toc"/>
+    <reference href="index_split_003.html#filepos5311" title="Beginning" type="text"/>
   </guide>
 </package>

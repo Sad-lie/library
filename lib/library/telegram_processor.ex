@@ -17,7 +17,7 @@ defmodule Library.TelegramProcessor do
   @base_url "https://api.telegram.org/"
   def process_start(chat_id,first_name, last_name, username) do
 
-    case   to_string(chat_id)|> Library.Users.user_exists() do
+    case  to_string(chat_id)|> Library.Users.user_exists() do
       true ->
         Telegram.sendMessage(
           "Hey #{first_name} #{last_name} Welcome back to the Library Bot.",
@@ -94,85 +94,160 @@ defmodule Library.TelegramProcessor do
     send_interval_options(interval_options, interval_labels, "Select the interval:", chat_id)
   end
 
-  def process_documents(first_name,last_name, username, chat_id, file_id, file_name) do
+  def process_documents(first_name, last_name, username, chat_id, file_id, file_name) do
     case Library.Books.get_book_by_name(file_name) do
-
-    false ->
-    Telegram.get_file(file_id)
-    |> case do
-      {:ok, %{"file_path" => file_path}} ->
-        IO.inspect(file_path)
-        path = "#{@api_url}/file/bot#{@token}/#{file_path}"
-
-        HTTPoison.get(path)
-        |> IO.inspect()
+      false ->
+        Telegram.get_file(file_id)
         |> case do
-          {:ok, %HTTPoison.Response{body: data}} ->
-            local_file_path = Path.join(["lib", "library", "files", file_name])
-            write_file(local_file_path, data)
-            user_id = to_string(chat_id)
+          {:ok, %{"file_path" => file_path}} ->
+            IO.inspect(file_path)
+            path = "#{@api_url}/file/bot#{@token}/#{file_path}"
 
-           # Convert the DateTime string to NaiveDateTime
-            current_time_iso8601 = DateTime.utc_now() |> DateTime.truncate(:second) |> DateTime.to_iso8601()
-            case NaiveDateTime.from_iso8601(current_time_iso8601) do
-                {:ok, naive_datetime} ->
-                  # Use the NaiveDateTime in your changeset
-                  book_id = :rand.uniform(1000_000_000)
-                   changeset =
-                    %Library.Schema.Book{}
-                      |> Ecto.Changeset.change(%{name: file_name, telegram_id: user_id, book_id: book_id})
+            HTTPoison.get(path)
+            |> IO.inspect()
+            |> case do
+              {:ok, %HTTPoison.Response{body: data}} ->
+                local_file_path = Path.join(["lib", "library", "files", file_name])
+                write_file(local_file_path, data)
+                user_id = to_string(chat_id)
+                book_id = :rand.uniform(1000_000_000)
+
+                # Convert the DateTime string to NaiveDateTime
+                current_time_iso8601 = DateTime.utc_now() |> DateTime.truncate(:second) |> DateTime.to_iso8601()
+
+                case NaiveDateTime.from_iso8601(current_time_iso8601) do
+                  {:ok, naive_datetime} ->
+                    # Use the NaiveDateTime in your changeset
+                    changeset =
+                      %Library.Schema.Book{}
+                      |> Ecto.Changeset.change(%{
+                        name: file_name,
+                        telegram_id: user_id,
+                        book_id: book_id
+                      })
                       |> Ecto.Changeset.put_change(:timestamp, naive_datetime)
 
                     IO.inspect(changeset)
 
                     case Library.Repo.insert(changeset) do
                       {:ok, _record} ->
-                        Telegram.sendMessage("#{first_name} #{last_name} inserted #{file_name} successfully.", chat_id)
+                        Telegram.sendMessage(
+                          "#{first_name} #{last_name} inserted #{file_name} successfully.",
+                          chat_id
+                        )
 
-
-
-
-
-                       {:error, changeset} ->
-                          IO.inspect(changeset.errors)
+                      {:error, changeset} ->
+                        IO.inspect(changeset.errors)
                     end
-                {:error, reason} ->
-            # Handle the error case
-                IO.puts("Error converting timestamp: #{reason}")
-            end
-            LibraryWeb.LibraryController.unzip_epub("/home/liar/elixir/projects/library/#{local_file_path}")
-            |> IO.inspect()
-            # book_id = Library.Books.get_book_id(file_name)
-            case Library.Books.get_book_by_name(file_name) do
-              true ->
-                # Book exists, get the book_id
-                [book_id] = Library.Books.get_book_id(file_name)
-                params = %{"telegram_id" => user_id, "book_id" => book_id}
-                Library.Contents.update_missing_parts(params)
-                Telegram.sendMessage("#{first_name} #{last_name} Chapters of  #{file_name} is ready.", chat_id)
-              false ->
-                # Book doesn't exist, proceed with inserting a new book
-                # ... (existing code)
-            end
-            # IO.inspect(local_file_path)
-            # params = %{"telegram_id" => user_id, "book_id" => book_id }
-            # IO.inspect(params)
-            # Library.Contents.update_missing_parts(params)
 
+                  {:error, reason} ->
+                    # Handle the error case
+                    IO.puts("Error converting timestamp: #{reason}")
+                end
+
+                LibraryWeb.LibraryController.unzip_epub(
+                  "/home/liar/elixir/projects/library/#{local_file_path}",
+                  book_id,
+                  user_id
+                )
+                Telegram.sendMessage("Book Gone through Unzip Successfully", chat_id)
+                |> IO.inspect()
+
+              {:error, %HTTPoison.Error{reason: :timeout}} ->
+                Telegram.sendMessage("#{:timeout} and #{}Request timed out. Please try again later.", chat_id)
+
+              {:error, error} ->
+                IO.inspect(error, label: "Unexpected Error")
+            end
+
+          _ ->
+            Telegram.sendMessage("Something Else went wrong", chat_id)
         end
 
-      {:error, %HTTPoison.Error{reason: :timeout}} ->
-        Telegram.sendMessage("Request timed out. Please try again later.", chat_id)
+      true ->
+        Telegram.sendMessage("#{first_name} #{last_name} You have already added #{file_name}.", chat_id)
 
-      {:error, error} ->
-        IO.inspect(error, label: "Unexpected Error")
-        _-> Telegram.sendMessage("Something Else went wrong", chat_id)
+      _ ->
+        Telegram.sendMessage("Something Else went wrong While adding the book", chat_id)
     end
-    |> LibraryWeb.LibraryController.unzip_epub()
-    true -> Telegram.sendMessage("#{first_name} #{last_name} You have already added #{file_name}.", chat_id)
-    _-> Telegram.sendMessage("Something Else went wrong While adding the book", chat_id)
   end
-end
+
+#   def process_documents(first_name,last_name, username, chat_id, file_id, file_name) do
+#     case Library.Books.get_book_by_name(file_name) do
+
+#     false ->
+#     Telegram.get_file(file_id)
+#     |> case do
+#       {:ok, %{"file_path" => file_path}} ->
+#         IO.inspect(file_path)
+#         path = "#{@api_url}/file/bot#{@token}/#{file_path}"
+
+#         HTTPoison.get(path)
+#         |> IO.inspect()
+#         |> case do
+#           {:ok, %HTTPoison.Response{body: data}} ->
+#             local_file_path = Path.join(["lib", "library", "files", file_name])
+#             write_file(local_file_path, data)
+#             user_id = to_string(chat_id)
+#             book_id = :rand.uniform(1000_000_000)
+#            # Convert the DateTime string to NaiveDateTime
+#             current_time_iso8601 = DateTime.utc_now() |> DateTime.truncate(:second) |> DateTime.to_iso8601()
+#             case NaiveDateTime.from_iso8601(current_time_iso8601) do
+#                 {:ok, naive_datetime} ->
+#                   # Use the NaiveDateTime in your changeset
+
+#                    changeset =
+#                     %Library.Schema.Book{}
+#                       |> Ecto.Changeset.change(%{name: file_name, telegram_id: user_id, book_id: book_id})
+#                       |> Ecto.Changeset.put_change(:timestamp, naive_datetime)
+
+#                     IO.inspect(changeset)
+
+#                     case Library.Repo.insert(changeset) do
+#                       {:ok, _record} ->
+#                         Telegram.sendMessage("#{first_name} #{last_name} inserted #{file_name} successfully.", chat_id)
+
+#                        {:error, changeset} ->
+#                           IO.inspect(changeset.errors)
+#                     end
+#                 {:error, reason} ->
+#             # Handle the error case
+#                 IO.puts("Error converting timestamp: #{reason}")
+#             end
+#             LibraryWeb.LibraryController.unzip_epub("/home/liar/elixir/projects/library/#{local_file_path}",book_id, user_id)
+#             |> IO.inspect()
+#             # book_id = Library.Books.get_book_id(file_name)
+#             # case Library.Books.get_book_by_name(file_name) do
+#             #   true ->
+#             #     # Book exists, get the book_id
+#             #     [book_id] = Library.Books.get_book_id(file_name)
+#             #     params = %{"telegram_id" => user_id, "book_id" => book_id}
+#             #     Library.Contents.update_missing_parts(params)
+#             #     Telegram.sendMessage("#{first_name} #{last_name} Chapters of #{file_name} is ready.", chat_id)
+#             #   false ->
+#             #     # Book doesn't exist, proceed with inserting a new book
+#             #     # ... (existing code)
+#             #     Telegram.sendMessage("An error occured while updateing book", chat_id)
+#             # end
+#             # IO.inspect(local_file_path)
+#             # params = %{"telegram_id" => user_id, "book_id" => book_id }
+#             # IO.inspect(params)
+#             # Library.Contents.update_missing_parts(params)
+
+#         end
+
+#       {:error, %HTTPoison.Error{reason: :timeout}} ->
+#         Telegram.sendMessage("Request timed out. Please try again later.", chat_id)
+
+#       {:error, error} ->
+#         IO.inspect(error, label: "Unexpected Error")
+#         _-> Telegram.sendMessage("Something Else went wrong", chat_id)
+#     end
+#     |> LibraryWeb.LibraryController.unzip_epub()
+#     true -> Telegram.sendMessage("#{first_name} #{last_name} You have already added #{file_name}.", chat_id)
+#     _-> Telegram.sendMessage("Something Else went wrong While adding the book", chat_id)
+#   end
+# end
 
   #call backs
 

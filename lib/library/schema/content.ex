@@ -7,17 +7,20 @@ defmodule Library.Schema.Content do
     field :chapter, :string
     field :timestamp, :naive_datetime
     field :data, :map
+    field :book_id, :integer
     field :telegram_id, :string
+    #belongs_to :book, Library.Schema.Book
     # Uncomment and adjust if you still have a book association
-    belongs_to :book, Library.Schema.Book
+    # belongs_to :book, Library.Schema.Book
 
     timestamps()
   end
 
   def changeset(contents, attrs) do
     contents
-    |> cast(attrs, [:chapter, :timestamp, :data, :book_id])
-    |> validate_required([:chapter, :timestamp])
+    |> cast(attrs, [:chapter, :timestamp, :data, :book_id, :telegram_id])
+    |> validate_required([:chapter, :timestamp, :book_id])
+   # |> foreign_key_constraint(:book_id, name: "contents_book_id_fkey")
   end
 end
 
