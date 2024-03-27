@@ -20,8 +20,10 @@ defmodule Library.Books do
     query = from(r in Book, where: r.name == ^file_name, select: r.name)
     Repo.exists?(query)
   end
-  def get_book_by_id(id) do
-
+  def get_book_id(file) do
+    file_name = to_string(file)
+    query = from(r in Book, where: r.name == ^file_name, select: r.book_id)
+    Repo.all(query)
   end
   # Get a single
   @spec get_book!(any()) :: any()
