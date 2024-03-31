@@ -17,9 +17,9 @@ defmodule Library.Schema.User do
     user
     |> cast(attrs, [:name, :telegram_id, :first_name, :last_name, :timestamp])
     |> validate_required([:name, :telegram_id, :timestamp])
-    |> put_change(:name, get_change(user, :name, "default_name"))
-    |> put_change(:telegram_id, get_change(user, :telegram_id, "default_telegram_id"))
-    |> put_change(:timestamp, get_change(user, :timestamp, NaiveDateTime.utc_now()))
+    # |> put_change(:name, get_change(user, :name))
+    # |> put_change(:telegram_id, get_change(user, :telegram_id))
+    # |> put_change(:timestamp, get_change(user, :timestamp, NaiveDateTime.utc_now()))
   end
 
 end

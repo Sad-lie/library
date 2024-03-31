@@ -29,11 +29,11 @@ defmodule Library.TelegramProcessor do
         collection_id = :rand.uniform(1000_000_000) |> Kernel.+(chat_id)
 
         user_attrs = %{
-          "telegram_id" => to_string(chat_id),
-          "name" => username,
-          "first_name" => first_name,
-          "last_name" => last_name,
-          "timestamp" => current_time
+          :telegram_id => to_string(chat_id),
+          :name => username,
+          :first_name => first_name,
+          :last_name => last_name,
+          :timestamp => current_time
         }
 
         IO.inspect(user_attrs)
